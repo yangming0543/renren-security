@@ -9,9 +9,9 @@
 package io.renren.common.exception;
 
 import cn.hutool.core.map.MapUtil;
-import com.alibaba.fastjson.JSON;
 import io.renren.common.utils.HttpContextUtils;
 import io.renren.common.utils.IpUtils;
+import io.renren.common.utils.JsonUtils;
 import io.renren.common.utils.Result;
 import io.renren.modules.log.entity.SysLogErrorEntity;
 import io.renren.modules.log.service.SysLogErrorService;
@@ -82,7 +82,7 @@ public class RenExceptionHandler {
 		log.setRequestMethod(request.getMethod());
 		Map<String, String> params = HttpContextUtils.getParameterMap(request);
 		if(MapUtil.isNotEmpty(params)){
-			log.setRequestParams(JSON.toJSONString(params));
+			log.setRequestParams(JsonUtils.toJsonString(params));
 		}
 
 		//异常信息

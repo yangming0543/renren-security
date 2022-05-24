@@ -8,9 +8,9 @@
 
 package io.renren.entity;
 
-import com.alibaba.fastjson.annotation.JSONField;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Data;
 
 import java.io.Serializable;
@@ -42,7 +42,7 @@ public class UserEntity implements Serializable {
 	/**
 	 * 密码
 	 */
-	@JSONField(serialize=false)
+	@JsonIgnore
 	private String password;
 	/**
 	 * 创建时间

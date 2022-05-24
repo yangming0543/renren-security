@@ -8,7 +8,6 @@
 
 package io.renren.modules.sys.service.impl;
 
-import com.alibaba.fastjson.JSON;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import io.renren.common.constant.Constant;
@@ -17,6 +16,7 @@ import io.renren.common.exception.RenException;
 import io.renren.common.page.PageData;
 import io.renren.common.service.impl.BaseServiceImpl;
 import io.renren.common.utils.ConvertUtils;
+import io.renren.common.utils.JsonUtils;
 import io.renren.modules.sys.dao.SysParamsDao;
 import io.renren.modules.sys.dto.SysParamsDTO;
 import io.renren.modules.sys.entity.SysParamsEntity;
@@ -121,7 +121,7 @@ public class SysParamsServiceImpl extends BaseServiceImpl<SysParamsDao, SysParam
     public <T> T getValueObject(String paramCode, Class<T> clazz) {
         String paramValue = getValue(paramCode);
         if(StringUtils.isNotBlank(paramValue)){
-            return JSON.parseObject(paramValue, clazz);
+            return JsonUtils.parseObject(paramValue, clazz);
         }
 
         try {

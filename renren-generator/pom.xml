@@ -24,7 +24,6 @@
 		<commons.lang.version>2.6</commons.lang.version>
 		<commons.io.version>2.11.0</commons.io.version>
 		<commons.configuration.version>1.10</commons.configuration.version>
-		<fastjson.version>2.0.1</fastjson.version>
 		<velocity.version>1.7</velocity.version>
 		<mssql.version>4.0</mssql.version>
 		<oracle.version>11.2.0.3</oracle.version>
@@ -69,11 +68,6 @@
 			<groupId>commons-configuration</groupId>
 			<artifactId>commons-configuration</artifactId>
 			<version>${commons.configuration.version}</version>
-		</dependency>
-		<dependency>
-			<groupId>com.alibaba</groupId>
-			<artifactId>fastjson</artifactId>
-			<version>${fastjson.version}</version>
 		</dependency>
 		<dependency>
 			<artifactId>velocity</artifactId>

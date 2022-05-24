@@ -8,10 +8,10 @@
 
 package io.renren.common.aspect;
 
-import com.alibaba.fastjson.JSON;
 import io.renren.common.annotation.LogOperation;
 import io.renren.common.utils.HttpContextUtils;
 import io.renren.common.utils.IpUtils;
+import io.renren.common.utils.JsonUtils;
 import io.renren.modules.log.entity.SysLogOperationEntity;
 import io.renren.modules.log.enums.OperationStatusEnum;
 import io.renren.modules.log.service.SysLogOperationService;
@@ -98,7 +98,7 @@ public class LogOperationAspect {
         //请求参数
         Object[] args = joinPoint.getArgs();
         try{
-            String params = JSON.toJSONString(args[0]);
+            String params = JsonUtils.toJsonString(args[0]);
             log.setRequestParams(params);
         }catch (Exception e){
 
