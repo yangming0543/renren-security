@@ -12,6 +12,7 @@ import cn.hutool.core.collection.CollUtil;
 import io.renren.common.annotation.DataFilter;
 import io.renren.common.constant.Constant;
 import io.renren.common.exception.ErrorCode;
+import io.renren.common.exception.RenException;
 import io.renren.common.interceptor.DataScope;
 import io.renren.modules.security.user.SecurityUser;
 import io.renren.modules.security.user.UserDetail;
@@ -65,7 +66,7 @@ public class DataFilterAspect {
             return ;
         }
 
-        throw new io.renren.common.exception.RenException(ErrorCode.DATA_SCOPE_PARAMS_ERROR);
+        throw new RenException(ErrorCode.DATA_SCOPE_PARAMS_ERROR);
     }
 
     /**
