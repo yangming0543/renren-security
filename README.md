@@ -1,9 +1,16 @@
 ### 项目说明
 - renren-security是一个轻量级的，前后端分离的Java快速开发平台，能快速开发项目并交付【接私活利器】
-- 采用SpringBoot、MyBatis、Shiro框架，开发的一套权限系统，极低门槛，拿来即用。设计之初，就非常注重安全性，为企业系统保驾护航，让一切都变得如此简单。
+- 采用SpringBoot、Shiro、MyBatis-Plus框架，开发的一套权限系统，极低门槛，拿来即用。设计之初，就非常注重安全性，为企业系统保驾护航，让一切都变得如此简单。
 - 提供了代码生成器，只需编写30%左右代码，其余的代码交给系统自动生成，可快速完成开发任务
 - 支持MySQL、Oracle、SQL Server、PostgreSQL等主流数据库
 - 前端地址：https://gitee.com/renrenio/renren-ui
+
+<br>
+
+### 项目演示
+- 演示地址：http://demo.open.renren.io/renren-security
+- 账号密码：admin/admin
+
 <br>
 
 ### 具有如下特点
@@ -15,11 +22,11 @@
 - 完善的部门管理及数据权限，通过注解实现数据权限的控制
 - 完善的XSS防范及脚本过滤，彻底杜绝XSS攻击
 - 完善的代码生成机制，可在线生成entity、xml、dao、service、vue、sql代码，减少70%以上的开发任务
-- 支持集群部署，session存储在redis中
 - 引入quartz定时任务，可动态完成任务的添加、修改、删除、暂停、恢复及日志查看等功能
 - 引入Hibernate Validator校验框架，轻松实现后端校验
 - 引入云存储服务，已支持：七牛云、阿里云、腾讯云等
 - 引入swagger文档支持，方便编写API接口文档
+
 <br>
 
 ### 数据权限设计思想
@@ -27,13 +34,14 @@
 - 菜单管理、定时任务、参数管理、字典管理、系统日志，没有数据权限
 - 业务功能，按照用户数据权限，查询、操作数据【没有本部门数据权限，也能查询本人数据】
 
-<br>
-
-### 项目演示
-- 演示地址：http://demo.open.renren.io/renren-security
-- 账号密码：admin/admin
-
 <br> 
+
+### 微信交流群
+我们提供了微信交流群，扫码下面的二维码，关注【人人开源】公众号，回复【加群】，即可根据提示加入微信群！
+<br><br>
+![输入图片说明](renren-admin/src/main/resources/public/wechat.jpg)
+
+<br>
 
 **项目结构**
 ```
@@ -121,7 +129,3 @@ renren-security
 - 技术讨论、二次开发等咨询、问题和建议，请移步到官方社区，我会在第一时间进行解答和回复！
 <br>
 
-### 微信交流群
-我们提供了微信交流群，扫码下面的二维码，关注【人人开源】公众号，回复【加群】，即可根据提示加入微信群！
-<br><br>
-![输入图片说明](renren-admin/src/main/resources/public/wechat.jpg)
