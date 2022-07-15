@@ -4,12 +4,14 @@
 - 提供了代码生成器，只需编写30%左右代码，其余的代码交给系统自动生成，可快速完成开发任务
 - 支持MySQL、Oracle、SQL Server、PostgreSQL等主流数据库
 - 前端地址：https://gitee.com/renrenio/renren-ui
+- 演示地址：http://demo.open.renren.io/renren-security （账号密码：admin/admin）
 
 <br>
 
-### 项目演示
-- 演示地址：http://demo.open.renren.io/renren-security
-- 账号密码：admin/admin
+### 微信交流群
+我们提供了微信交流群，扫码下面的二维码，关注【人人开源】公众号，回复【加群】，即可根据提示加入微信群！
+<br><br>
+![输入图片说明](renren-admin/src/main/resources/public/wechat.jpg)
 
 <br>
 
@@ -36,12 +38,6 @@
 
 <br> 
 
-### 微信交流群
-我们提供了微信交流群，扫码下面的二维码，关注【人人开源】公众号，回复【加群】，即可根据提示加入微信群！
-<br><br>
-![输入图片说明](renren-admin/src/main/resources/public/wechat.jpg)
-
-<br>
 
 **项目结构**
 ```
