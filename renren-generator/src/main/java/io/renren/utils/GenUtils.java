@@ -71,7 +71,7 @@ public class GenUtils {
 		tableEntity.setClassname(StringUtils.uncapitalize(className));
 		
 		//列信息
-		List<ColumnEntity> columsList = new ArrayList<>();
+		List<ColumnEntity> columnsList = new ArrayList<>();
 		for(Map<String, String> column : columns){
 			ColumnEntity columnEntity = new ColumnEntity();
 			columnEntity.setColumnName(column.get("columnName"));
@@ -94,10 +94,10 @@ public class GenUtils {
 			if("PRI".equalsIgnoreCase(column.get("columnKey")) && tableEntity.getPk() == null){
 				tableEntity.setPk(columnEntity);
 			}
-			
-			columsList.add(columnEntity);
+
+			columnsList.add(columnEntity);
 		}
-		tableEntity.setColumns(columsList);
+		tableEntity.setColumns(columnsList);
 		
 		//没主键，则第一个字段为主键
 		if(tableEntity.getPk() == null){
