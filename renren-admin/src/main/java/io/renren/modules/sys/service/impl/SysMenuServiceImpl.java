@@ -75,8 +75,8 @@ public class SysMenuServiceImpl extends BaseServiceImpl<SysMenuDao, SysMenuEntit
 	}
 
 	@Override
-	public List<SysMenuDTO> getAllMenuList(Integer type) {
-		List<SysMenuEntity> menuList = baseDao.getMenuList(type);
+	public List<SysMenuDTO> getAllMenuList(Integer menuType) {
+		List<SysMenuEntity> menuList = baseDao.getMenuList(menuType);
 
 		List<SysMenuDTO> dtoList = ConvertUtils.sourceToTarget(menuList, SysMenuDTO.class);
 
@@ -84,14 +84,14 @@ public class SysMenuServiceImpl extends BaseServiceImpl<SysMenuDao, SysMenuEntit
 	}
 
 	@Override
-	public List<SysMenuDTO> getUserMenuList(UserDetail user, Integer type) {
+	public List<SysMenuDTO> getUserMenuList(UserDetail user, Integer menuType) {
 		List<SysMenuEntity> menuList;
 
 		//系统管理员，拥有最高权限
 		if(user.getSuperAdmin() == SuperAdminEnum.YES.value()){
-			menuList = baseDao.getMenuList(type);
+			menuList = baseDao.getMenuList(menuType);
 		}else {
-			menuList = baseDao.getUserMenuList(user.getId(), type);
+			menuList = baseDao.getUserMenuList(user.getId(), menuType);
 		}
 
 		List<SysMenuDTO> dtoList = ConvertUtils.sourceToTarget(menuList, SysMenuDTO.class);

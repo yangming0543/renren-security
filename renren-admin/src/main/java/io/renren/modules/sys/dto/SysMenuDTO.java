@@ -52,7 +52,7 @@ public class SysMenuDTO extends TreeNode<SysMenuDTO> implements Serializable {
 
 	@ApiModelProperty(value = "类型  0：菜单   1：按钮")
 	@Range(min=0, max=1, message = "{sysmenu.type.range}", groups = DefaultGroup.class)
-	private Integer type;
+	private Integer menuType;
 
 	@ApiModelProperty(value = "菜单图标")
 	private String icon;
@@ -107,12 +107,12 @@ public class SysMenuDTO extends TreeNode<SysMenuDTO> implements Serializable {
 		this.url = url;
 	}
 
-	public Integer getType() {
-		return type;
+	public Integer getMenuType() {
+		return menuType;
 	}
 
-	public void setType(Integer type) {
-		this.type = type;
+	public void setMenuType(Integer menuType) {
+		this.menuType = menuType;
 	}
 
 	public String getIcon() {

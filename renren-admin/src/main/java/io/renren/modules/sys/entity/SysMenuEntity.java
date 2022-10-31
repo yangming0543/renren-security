@@ -47,7 +47,7 @@ public class SysMenuEntity extends BaseEntity {
 	/**
 	 * 类型   0：菜单   1：按钮
 	 */
-	private Integer type;
+	private Integer menuType;
 	/**
 	 * 菜单图标
 	 */

@@ -11,8 +11,8 @@
 	<select id="getMenuList" resultType="io.renren.modules.sys.entity.SysMenuEntity">
 		select t1.* from sys_menu t1
 		<where>
-			<if test="type != null">
-				t1.type = #{type}
+			<if test="menuType != null">
+				t1.menu_type = #{menuType}
 			</if>
 		</where>
 		order by t1.sort asc
@@ -23,8 +23,8 @@
 		left join sys_role_menu t2 on t1.role_id = t2.role_id
 		left join sys_menu t3 on t2.menu_id = t3.id
 		where t1.user_id = #{userId}
-		<if test="type != null">
-			and t3.type = #{type}
+		<if test="menuType != null">
+			and t3.menu_type = #{menuType}
 		</if>
 		order by t3.sort asc
 	</select>

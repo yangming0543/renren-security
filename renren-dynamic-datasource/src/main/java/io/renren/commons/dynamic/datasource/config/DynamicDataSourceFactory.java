@@ -44,7 +44,7 @@ public class DynamicDataSourceFactory {
         druidDataSource.setSharePreparedStatements(properties.isSharePreparedStatements());
 
         try {
-            druidDataSource.setFilters(properties.getFilters());
+            // druidDataSource.setFilters(properties.getFilters());
             druidDataSource.init();
         } catch (SQLException e) {
             e.printStackTrace();
