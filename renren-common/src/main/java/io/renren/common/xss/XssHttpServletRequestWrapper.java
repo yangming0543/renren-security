@@ -41,7 +41,7 @@ public class XssHttpServletRequestWrapper extends HttpServletRequestWrapper {
     @Override
     public ServletInputStream getInputStream() throws IOException {
         //非json类型，直接返回
-        if(!MediaType.APPLICATION_JSON_VALUE.contains(super.getHeader(HttpHeaders.CONTENT_TYPE))){
+        if(!checkContentTypeIsJson()){
             return super.getInputStream();
         }
 
@@ -143,5 +143,12 @@ public class XssHttpServletRequestWrapper extends HttpServletRequestWrapper {
 
         return request;
     }
-
+    /**
+     * 判断是否是json请求，以前缀的方式
+     */
+    private boolean checkContentTypeIsJson()
+    {
+        String header = super.getHeader(HttpHeaders.CONTENT_TYPE);
+        return StringUtils.startsWithIgnoreCase(header, MediaType.APPLICATION_JSON_VALUE);
+    }
 }
