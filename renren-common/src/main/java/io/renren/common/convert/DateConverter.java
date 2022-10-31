@@ -32,8 +32,8 @@ public class DateConverter implements Converter<String, Date> {
     static {
         formatList.add("yyyy-MM");
         formatList.add("yyyy-MM-dd");
-        formatList.add("yyyy-MM-dd hh:mm");
-        formatList.add("yyyy-MM-dd hh:mm:ss");
+        formatList.add("yyyy-MM-dd HH:mm");
+        formatList.add("yyyy-MM-dd HH:mm:ss");
         formatList.add("yyyy-MM-dd'T'HH:mm:ss.SSSZ");
     }
 
