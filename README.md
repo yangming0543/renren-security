@@ -2,7 +2,7 @@
 - renren-security是一个轻量级的，前后端分离的Java快速开发平台，能快速开发项目并交付【接私活利器】
 - 采用SpringBoot、Shiro、MyBatis-Plus框架，开发的一套权限系统，极低门槛，拿来即用。设计之初，就非常注重安全性，为企业系统保驾护航，让一切都变得如此简单。
 - 提供了代码生成器，只需编写30%左右代码，其余的代码交给系统自动生成，可快速完成开发任务
-- 支持MySQL、Oracle、SQL Server、PostgreSQL等主流数据库
+- 支持MySQL、达梦、Oracle、SQL Server、PostgreSQL等主流数据库
 - 前端地址：https://gitee.com/renrenio/renren-ui
 - 演示地址：http://demo.open.renren.io/renren-security （账号密码：admin/admin）
 
@@ -74,8 +74,8 @@ renren-security
 <br>
 
 **技术选型：**
-- 核心框架：Spring Boot 2.6
-- 安全框架：Apache Shiro 1.9
+- 核心框架：Spring Boot 2.7
+- 安全框架：Apache Shiro 1.10
 - 持久层框架：MyBatis 3.5
 - 定时器：Quartz 2.3
 - 数据库连接池：Druid 1.2
@@ -91,6 +91,7 @@ renren-security
 - Oracle 11g+
 - SQL Server 2012+
 - PostgreSQL 9.4+
+- 达梦8
 <br>
 
 
