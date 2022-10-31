@@ -33,6 +33,7 @@
         <mybatisplus.version>3.5.2</mybatisplus.version>
         <sqlserver.version>4.0</sqlserver.version>
         <oracle.version>11.2.0.3</oracle.version>
+        <dameng.version>8.1.2.79</dameng.version>
         <commons.lang.version>3.12.0</commons.lang.version>
         <commons.fileupload.version>1.4</commons.fileupload.version>
         <commons.io.version>2.11.0</commons.io.version>
@@ -104,6 +105,12 @@
         <dependency>
             <groupId>org.postgresql</groupId>
             <artifactId>postgresql</artifactId>
+        </dependency>
+        <!-- 达梦驱动 -->
+        <dependency>
+            <groupId>com.dameng</groupId>
+            <artifactId>DmJdbcDriver18</artifactId>
+            <version>${dameng.version}</version>
         </dependency>
         <dependency>
             <groupId>com.alibaba</groupId>
