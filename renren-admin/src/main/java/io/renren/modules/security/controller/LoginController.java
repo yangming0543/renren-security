@@ -90,7 +90,6 @@ public class LoginController {
 		log.setCreateDate(new Date());
 		log.setIp(IpUtils.getIpAddr(request));
 		log.setUserAgent(request.getHeader(HttpHeaders.USER_AGENT));
-		log.setIp(IpUtils.getIpAddr(request));
 
 		//用户不存在
 		if(user == null){
