@@ -6,7 +6,7 @@ import ${package}.modules.${moduleName}.dao.${className}Dao;
 import ${package}.modules.${moduleName}.dto.${className}DTO;
 import ${package}.modules.${moduleName}.entity.${className}Entity;
 import ${package}.modules.${moduleName}.service.${className}Service;
-import org.apache.commons.lang3.StringUtils;
+import cn.hutool.core.util.StrUtil;
 import org.springframework.stereotype.Service;
 
 import java.util.Map;
@@ -25,7 +25,7 @@ public class ${className}ServiceImpl extends CrudServiceImpl<${className}Dao, ${
         String id = (String)params.get("id");
 
         QueryWrapper<${className}Entity> wrapper = new QueryWrapper<>();
-        wrapper.eq(StringUtils.isNotBlank(id), "id", id);
+        wrapper.eq(StrUtil.isNotBlank(id), "id", id);
 
         return wrapper;
     }

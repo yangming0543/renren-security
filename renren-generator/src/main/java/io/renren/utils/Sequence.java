@@ -15,7 +15,7 @@
  */
 package io.renren.utils;
 
-import org.apache.commons.lang.StringUtils;
+import cn.hutool.core.util.StrUtil;
 import org.apache.ibatis.logging.Log;
 import org.apache.ibatis.logging.LogFactory;
 
@@ -89,9 +89,9 @@ public class Sequence {
      */
     public Sequence(long workerId, long datacenterId) {
         Assert.isFalse(workerId > maxWorkerId || workerId < 0,
-            String.format("worker Id can't be greater than %d or less than 0", maxWorkerId));
+                String.format("worker Id can't be greater than %d or less than 0", maxWorkerId));
         Assert.isFalse(datacenterId > maxDatacenterId || datacenterId < 0,
-            String.format("datacenter Id can't be greater than %d or less than 0", maxDatacenterId));
+                String.format("datacenter Id can't be greater than %d or less than 0", maxDatacenterId));
         this.workerId = workerId;
         this.datacenterId = datacenterId;
     }
@@ -105,7 +105,7 @@ public class Sequence {
         StringBuilder mpid = new StringBuilder();
         mpid.append(datacenterId);
         String name = ManagementFactory.getRuntimeMXBean().getName();
-        if (StringUtils.isNotEmpty(name)) {
+        if (StrUtil.isNotEmpty(name)) {
             /*
              * GET jvmPid
              */
@@ -183,9 +183,9 @@ public class Sequence {
 
         // 时间戳部分 | 数据中心部分 | 机器标识部分 | 序列号部分
         return ((timestamp - twepoch) << timestampLeftShift)
-            | (datacenterId << datacenterIdShift)
-            | (workerId << workerIdShift)
-            | sequence;
+                | (datacenterId << datacenterIdShift)
+                | (workerId << workerIdShift)
+                | sequence;
     }
 
     protected long tilNextMillis(long lastTimestamp) {

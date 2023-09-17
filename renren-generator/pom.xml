@@ -21,12 +21,11 @@
 		<mybatis.spring.boot.version>2.2.2</mybatis.spring.boot.version>
 		<pagehelper.spring.boot.version>1.4.2</pagehelper.spring.boot.version>
 		<druid.version>1.2.14</druid.version>
-		<commons.lang.version>2.6</commons.lang.version>
-		<commons.io.version>2.11.0</commons.io.version>
 		<commons.configuration.version>1.10</commons.configuration.version>
 		<velocity.version>1.7</velocity.version>
 		<mssql.version>4.0</mssql.version>
 		<oracle.version>11.2.0.3</oracle.version>
+		<hutool.version>5.8.22</hutool.version>
 	</properties>
 
 	<dependencies>
@@ -55,16 +54,6 @@
 			<version>${druid.version}</version>
 		</dependency>
 		<dependency>
-			<groupId>commons-lang</groupId>
-			<artifactId>commons-lang</artifactId>
-			<version>${commons.lang.version}</version>
-		</dependency>
-		<dependency>
-			<groupId>commons-io</groupId>
-			<artifactId>commons-io</artifactId>
-			<version>${commons.io.version}</version>
-		</dependency>
-		<dependency>
 			<groupId>commons-configuration</groupId>
 			<artifactId>commons-configuration</artifactId>
 			<version>${commons.configuration.version}</version>
@@ -73,6 +62,11 @@
 			<artifactId>velocity</artifactId>
 			<groupId>org.apache.velocity</groupId>
 			<version>${velocity.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>cn.hutool</groupId>
+			<artifactId>hutool-all</artifactId>
+			<version>${hutool.version}</version>
 		</dependency>
 		<!-- mysql驱动 -->
 		<dependency>
