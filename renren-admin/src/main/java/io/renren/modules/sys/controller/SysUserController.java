@@ -32,8 +32,8 @@ import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiImplicitParams;
 import io.swagger.annotations.ApiOperation;
+import lombok.AllArgsConstructor;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import springfox.documentation.annotations.ApiIgnore;
 
@@ -50,11 +50,10 @@ import java.util.Map;
 @RestController
 @RequestMapping("/sys/user")
 @Api(tags = "用户管理")
+@AllArgsConstructor
 public class SysUserController {
-    @Autowired
-    private SysUserService sysUserService;
-    @Autowired
-    private SysRoleUserService sysRoleUserService;
+    private final SysUserService sysUserService;
+    private final SysRoleUserService sysRoleUserService;
 
     @GetMapping("page")
     @ApiOperation("分页")

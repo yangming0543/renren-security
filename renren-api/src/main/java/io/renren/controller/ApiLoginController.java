@@ -1,8 +1,8 @@
 /**
  * Copyright (c) 2018 人人开源 All rights reserved.
- *
+ * <p>
  * https://www.renren.io
- *
+ * <p>
  * 版权所有，侵权必究！
  */
 
@@ -17,7 +17,7 @@ import io.renren.service.TokenService;
 import io.renren.service.UserService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.AllArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 import springfox.documentation.annotations.ApiIgnore;
 
@@ -30,17 +30,16 @@ import java.util.Map;
  */
 @RestController
 @RequestMapping("/api")
-@Api(tags="登录接口")
+@Api(tags = "登录接口")
+@AllArgsConstructor
 public class ApiLoginController {
-    @Autowired
-    private UserService userService;
-    @Autowired
-    private TokenService tokenService;
+    private final UserService userService;
+    private final TokenService tokenService;
 
 
     @PostMapping("login")
     @ApiOperation("登录")
-    public Result<Map<String, Object>> login(@RequestBody LoginDTO dto){
+    public Result<Map<String, Object>> login(@RequestBody LoginDTO dto) {
         //表单校验
         ValidatorUtils.validateEntity(dto);
 
@@ -53,7 +52,7 @@ public class ApiLoginController {
     @Login
     @PostMapping("logout")
     @ApiOperation("退出")
-    public Result logout(@ApiIgnore @RequestAttribute("userId") Long userId){
+    public Result logout(@ApiIgnore @RequestAttribute("userId") Long userId) {
         tokenService.expireToken(userId);
         return new Result();
     }

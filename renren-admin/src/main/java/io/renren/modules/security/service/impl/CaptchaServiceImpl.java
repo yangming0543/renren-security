@@ -15,10 +15,10 @@ import com.wf.captcha.base.Captcha;
 import io.renren.common.redis.RedisKeys;
 import io.renren.common.redis.RedisUtils;
 import io.renren.modules.security.service.CaptchaService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
+import javax.annotation.Resource;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
@@ -29,7 +29,7 @@ import java.io.IOException;
  */
 @Service
 public class CaptchaServiceImpl implements CaptchaService {
-    @Autowired
+    @Resource
     private RedisUtils redisUtils;
     @Value("${renren.redis.open: false}")
     private boolean open;

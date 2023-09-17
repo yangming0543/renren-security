@@ -16,7 +16,7 @@ import io.renren.entity.UserEntity;
 import io.renren.service.UserService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.AllArgsConstructor;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -32,9 +32,9 @@ import java.util.Date;
 @RestController
 @RequestMapping("/api")
 @Api(tags = "注册接口")
+@AllArgsConstructor
 public class ApiRegisterController {
-    @Autowired
-    private UserService userService;
+    private final UserService userService;
 
     @PostMapping("register")
     @ApiOperation("注册")

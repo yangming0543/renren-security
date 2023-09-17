@@ -26,8 +26,8 @@ import io.renren.modules.oss.service.SysOssService;
 import io.renren.modules.sys.service.SysParamsService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
+import lombok.AllArgsConstructor;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import springfox.documentation.annotations.ApiIgnore;
@@ -45,11 +45,10 @@ import java.util.Map;
 @RestController
 @RequestMapping("sys/oss")
 @Api(tags = "文件上传")
+@AllArgsConstructor
 public class SysOssController {
-    @Autowired
-    private SysOssService sysOssService;
-    @Autowired
-    private SysParamsService sysParamsService;
+    private final SysOssService sysOssService;
+    private final SysParamsService sysParamsService;
 
     private final static String KEY = Constant.CLOUD_STORAGE_CONFIG_KEY;
 

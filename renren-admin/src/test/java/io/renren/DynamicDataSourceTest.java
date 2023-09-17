@@ -1,8 +1,8 @@
 /**
  * Copyright (c) 2018 人人开源 All rights reserved.
- *
+ * <p>
  * https://www.renren.io
- *
+ * <p>
  * 版权所有，侵权必究！
  */
 
@@ -11,9 +11,10 @@ package io.renren;
 import io.renren.service.DynamicDataSourceTestService;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
+
+import javax.annotation.Resource;
 
 /**
  * 多数据源测试
@@ -23,11 +24,11 @@ import org.springframework.test.context.junit4.SpringRunner;
 @RunWith(SpringRunner.class)
 @SpringBootTest
 public class DynamicDataSourceTest {
-    @Autowired
+    @Resource
     private DynamicDataSourceTestService dynamicDataSourceTestService;
 
     @Test
-    public void test(){
+    public void test() {
         Long id = 1067246875800000001L;
 
         dynamicDataSourceTestService.updateUser(id);

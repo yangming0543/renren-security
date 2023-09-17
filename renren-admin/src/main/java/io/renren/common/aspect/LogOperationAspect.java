@@ -1,8 +1,8 @@
 /**
  * Copyright (c) 2018 人人开源 All rights reserved.
- *
+ * <p>
  * https://www.renren.io
- *
+ * <p>
  * 版权所有，侵权必究！
  */
 
@@ -17,12 +17,12 @@ import io.renren.modules.log.enums.OperationStatusEnum;
 import io.renren.modules.log.service.SysLogOperationService;
 import io.renren.modules.security.user.SecurityUser;
 import io.renren.modules.security.user.UserDetail;
+import lombok.AllArgsConstructor;
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.Around;
 import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.annotation.Pointcut;
 import org.aspectj.lang.reflect.MethodSignature;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.stereotype.Component;
 
@@ -36,9 +36,9 @@ import java.lang.reflect.Method;
  */
 @Aspect
 @Component
+@AllArgsConstructor
 public class LogOperationAspect {
-    @Autowired
-    private SysLogOperationService sysLogOperationService;
+    private final SysLogOperationService sysLogOperationService;
 
     @Pointcut("@annotation(io.renren.common.annotation.LogOperation)")
     public void logPointCut() {
@@ -58,7 +58,7 @@ public class LogOperationAspect {
             saveLog(point, time, OperationStatusEnum.SUCCESS.value());
 
             return result;
-        }catch(Exception e) {
+        } catch (Exception e) {
             //执行时长(毫秒)
             long time = System.currentTimeMillis() - beginTime;
             //保存日志
@@ -74,19 +74,19 @@ public class LogOperationAspect {
         LogOperation annotation = method.getAnnotation(LogOperation.class);
 
         SysLogOperationEntity log = new SysLogOperationEntity();
-        if(annotation != null){
+        if (annotation != null) {
             //注解上的描述
             log.setOperation(annotation.value());
         }
 
         //登录用户信息
         UserDetail user = SecurityUser.getUser();
-        if(user != null){
+        if (user != null) {
             log.setCreatorName(user.getUsername());
         }
 
         log.setStatus(status);
-        log.setRequestTime((int)time);
+        log.setRequestTime((int) time);
 
         //请求相关信息
         HttpServletRequest request = HttpContextUtils.getHttpServletRequest();
@@ -97,10 +97,10 @@ public class LogOperationAspect {
 
         //请求参数
         Object[] args = joinPoint.getArgs();
-        try{
+        try {
             String params = JsonUtils.toJsonString(args[0]);
             log.setRequestParams(params);
-        }catch (Exception e){
+        } catch (Exception e) {
 
         }
 

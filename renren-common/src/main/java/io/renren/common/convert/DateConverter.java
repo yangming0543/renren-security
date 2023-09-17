@@ -1,8 +1,8 @@
 /**
  * Copyright (c) 2018 人人开源 All rights reserved.
- *
+ * <p>
  * https://www.renren.io
- *
+ * <p>
  * 版权所有，侵权必究！
  */
 
@@ -28,7 +28,8 @@ import java.util.List;
 @Component
 public class DateConverter implements Converter<String, Date> {
     private static final Logger logger = LoggerFactory.getLogger(DateConverter.class);
-    private static List<String> formatList = new ArrayList<>(5);
+    private static final List<String> formatList = new ArrayList<>(5);
+
     static {
         formatList.add("yyyy-MM");
         formatList.add("yyyy-MM-dd");
@@ -44,15 +45,15 @@ public class DateConverter implements Converter<String, Date> {
             return null;
         }
 
-        if(source.matches("^\\d{4}-\\d{1,2}$")){
+        if (source.matches("^\\d{4}-\\d{1,2}$")) {
             return parseDate(source, formatList.get(0));
-        }else if(source.matches("^\\d{4}-\\d{1,2}-\\d{1,2}$")){
+        } else if (source.matches("^\\d{4}-\\d{1,2}-\\d{1,2}$")) {
             return parseDate(source, formatList.get(1));
-        }else if(source.matches("^\\d{4}-\\d{1,2}-\\d{1,2} {1}\\d{1,2}:\\d{1,2}$")){
+        } else if (source.matches("^\\d{4}-\\d{1,2}-\\d{1,2} {1}\\d{1,2}:\\d{1,2}$")) {
             return parseDate(source, formatList.get(2));
-        }else if(source.matches("^\\d{4}-\\d{1,2}-\\d{1,2} {1}\\d{1,2}:\\d{1,2}:\\d{1,2}$")){
+        } else if (source.matches("^\\d{4}-\\d{1,2}-\\d{1,2} {1}\\d{1,2}:\\d{1,2}:\\d{1,2}$")) {
             return parseDate(source, formatList.get(3));
-        }else if(source.matches("^\\d{4}-\\d{1,2}-\\d{1,2}.*T.*\\d{1,2}:\\d{1,2}:\\d{1,2}.*..*$")){
+        } else if (source.matches("^\\d{4}-\\d{1,2}-\\d{1,2}.*T.*\\d{1,2}:\\d{1,2}:\\d{1,2}.*..*$")) {
             return parseDate(source, formatList.get(4));
         } else {
             throw new IllegalArgumentException("Invalid boolean value '" + source + "'");

@@ -1,13 +1,14 @@
 /**
  * Copyright (c) 2018 人人开源 All rights reserved.
- *
+ * <p>
  * https://www.renren.io
- *
+ * <p>
  * 版权所有，侵权必究！
  */
 
 package io.renren.modules.sys.service.impl;
 
+import cn.hutool.core.util.StrUtil;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import io.renren.common.page.PageData;
@@ -20,8 +21,7 @@ import io.renren.modules.sys.entity.DictData;
 import io.renren.modules.sys.entity.DictType;
 import io.renren.modules.sys.entity.SysDictTypeEntity;
 import io.renren.modules.sys.service.SysDictTypeService;
-import cn.hutool.core.util.StrUtil;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -35,20 +35,21 @@ import java.util.Map;
  * @author Mark sunlightcs@gmail.com
  */
 @Service
+@AllArgsConstructor
 public class SysDictTypeServiceImpl extends BaseServiceImpl<SysDictTypeDao, SysDictTypeEntity> implements SysDictTypeService {
-    @Autowired
-    private SysDictDataDao sysDictDataDao;
+    private final SysDictDataDao sysDictDataDao;
+
     @Override
     public PageData<SysDictTypeDTO> page(Map<String, Object> params) {
         IPage<SysDictTypeEntity> page = baseDao.selectPage(
-            getPage(params, "sort", true),
-            getWrapper(params)
+                getPage(params, "sort", true),
+                getWrapper(params)
         );
 
         return getPageData(page, SysDictTypeDTO.class);
     }
 
-    private QueryWrapper<SysDictTypeEntity> getWrapper(Map<String, Object> params){
+    private QueryWrapper<SysDictTypeEntity> getWrapper(Map<String, Object> params) {
         String dictType = (String) params.get("dictType");
         String dictName = (String) params.get("dictName");
 
@@ -93,9 +94,9 @@ public class SysDictTypeServiceImpl extends BaseServiceImpl<SysDictTypeDao, SysD
     public List<DictType> getAllList() {
         List<DictType> typeList = baseDao.getDictTypeList();
         List<DictData> dataList = sysDictDataDao.getDictDataList();
-        for(DictType type : typeList){
-            for(DictData data : dataList){
-                if(type.getId().equals(data.getDictTypeId())){
+        for (DictType type : typeList) {
+            for (DictData data : dataList) {
+                if (type.getId().equals(data.getDictTypeId())) {
                     type.getDataList().add(data);
                 }
             }

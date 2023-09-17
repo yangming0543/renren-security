@@ -19,16 +19,16 @@ import io.renren.entity.TokenEntity;
 import io.renren.entity.UserEntity;
 import io.renren.service.TokenService;
 import io.renren.service.UserService;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.HashMap;
 import java.util.Map;
 
 @Service
+@AllArgsConstructor
 public class UserServiceImpl extends BaseServiceImpl<UserDao, UserEntity> implements UserService {
-    @Autowired
-    private TokenService tokenService;
+    private final TokenService tokenService;
 
     @Override
     public UserEntity getByMobile(String mobile) {

@@ -1,8 +1,8 @@
 /**
  * Copyright (c) 2018 人人开源 All rights reserved.
- *
+ * <p>
  * https://www.renren.io
- *
+ * <p>
  * 版权所有，侵权必究！
  */
 
@@ -11,16 +11,16 @@ package io.renren.modules.security.oauth2;
 import io.renren.common.exception.ErrorCode;
 import io.renren.common.utils.ConvertUtils;
 import io.renren.common.utils.MessageUtils;
-import io.renren.modules.security.user.UserDetail;
-import io.renren.modules.sys.entity.SysUserEntity;
 import io.renren.modules.security.entity.SysUserTokenEntity;
 import io.renren.modules.security.service.ShiroService;
+import io.renren.modules.security.user.UserDetail;
+import io.renren.modules.sys.entity.SysUserEntity;
+import lombok.AllArgsConstructor;
 import org.apache.shiro.authc.*;
 import org.apache.shiro.authz.AuthorizationInfo;
 import org.apache.shiro.authz.SimpleAuthorizationInfo;
 import org.apache.shiro.realm.AuthorizingRealm;
 import org.apache.shiro.subject.PrincipalCollection;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
@@ -32,9 +32,9 @@ import java.util.Set;
  * @author Mark sunlightcs@gmail.com
  */
 @Component
+@AllArgsConstructor
 public class Oauth2Realm extends AuthorizingRealm {
-    @Autowired
-    private ShiroService shiroService;
+    private final ShiroService shiroService;
 
     @Override
     public boolean supports(AuthenticationToken token) {
@@ -46,7 +46,7 @@ public class Oauth2Realm extends AuthorizingRealm {
      */
     @Override
     protected AuthorizationInfo doGetAuthorizationInfo(PrincipalCollection principals) {
-        UserDetail user = (UserDetail)principals.getPrimaryPrincipal();
+        UserDetail user = (UserDetail) principals.getPrimaryPrincipal();
 
         //用户权限列表
         Set<String> permsSet = shiroService.getUserPermissions(user);
@@ -66,7 +66,7 @@ public class Oauth2Realm extends AuthorizingRealm {
         //根据accessToken，查询用户信息
         SysUserTokenEntity tokenEntity = shiroService.getByToken(accessToken);
         //token失效
-        if(tokenEntity == null || tokenEntity.getExpireDate().getTime() < System.currentTimeMillis()){
+        if (tokenEntity == null || tokenEntity.getExpireDate().getTime() < System.currentTimeMillis()) {
             throw new IncorrectCredentialsException(MessageUtils.getMessage(ErrorCode.TOKEN_INVALID));
         }
 
@@ -81,7 +81,7 @@ public class Oauth2Realm extends AuthorizingRealm {
         userDetail.setDeptIdList(deptIdList);
 
         //账号锁定
-        if(userDetail.getStatus() == 0){
+        if (userDetail.getStatus() == 0) {
             throw new LockedAccountException(MessageUtils.getMessage(ErrorCode.ACCOUNT_LOCK));
         }
 

@@ -23,7 +23,7 @@ import io.renren.modules.sys.dto.SysDeptDTO;
 import io.renren.modules.sys.entity.SysDeptEntity;
 import io.renren.modules.sys.enums.SuperAdminEnum;
 import io.renren.modules.sys.service.SysDeptService;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -34,9 +34,9 @@ import java.util.Map;
 
 
 @Service
+@AllArgsConstructor
 public class SysDeptServiceImpl extends BaseServiceImpl<SysDeptDao, SysDeptEntity> implements SysDeptService {
-    @Autowired
-    private SysUserDao sysUserDao;
+    private final SysUserDao sysUserDao;
 
     @Override
     public List<SysDeptDTO> list(Map<String, Object> params) {

@@ -1,8 +1,8 @@
 /**
  * Copyright (c) 2018 人人开源 All rights reserved.
- *
+ * <p>
  * https://www.renren.io
- *
+ * <p>
  * 版权所有，侵权必究！
  */
 
@@ -17,13 +17,7 @@ import java.util.Deque;
  * @author Mark sunlightcs@gmail.com
  */
 public class DynamicContextHolder {
-    @SuppressWarnings("unchecked")
-    private static final ThreadLocal<Deque<String>> CONTEXT_HOLDER = new ThreadLocal() {
-        @Override
-        protected Object initialValue() {
-            return new ArrayDeque();
-        }
-    };
+    private static final ThreadLocal<Deque<String>> CONTEXT_HOLDER = ThreadLocal.withInitial(ArrayDeque::new);
 
     /**
      * 获得当前线程数据源

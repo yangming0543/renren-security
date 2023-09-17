@@ -1,13 +1,14 @@
 /**
  * Copyright (c) 2018 人人开源 All rights reserved.
- *
+ * <p>
  * https://www.renren.io
- *
+ * <p>
  * 版权所有，侵权必究！
  */
 
 package io.renren.modules.sys.service.impl;
 
+import cn.hutool.core.util.StrUtil;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import io.renren.common.constant.Constant;
@@ -22,8 +23,7 @@ import io.renren.modules.sys.dto.SysParamsDTO;
 import io.renren.modules.sys.entity.SysParamsEntity;
 import io.renren.modules.sys.redis.SysParamsRedis;
 import io.renren.modules.sys.service.SysParamsService;
-import cn.hutool.core.util.StrUtil;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -38,15 +38,15 @@ import java.util.Map;
  * @since 1.0.0
  */
 @Service
+@AllArgsConstructor
 public class SysParamsServiceImpl extends BaseServiceImpl<SysParamsDao, SysParamsEntity> implements SysParamsService {
-    @Autowired
-    private SysParamsRedis sysParamsRedis;
+    private final SysParamsRedis sysParamsRedis;
 
     @Override
     public PageData<SysParamsDTO> page(Map<String, Object> params) {
         IPage<SysParamsEntity> page = baseDao.selectPage(
-            getPage(params, Constant.CREATE_DATE, false),
-            getWrapper(params)
+                getPage(params, Constant.CREATE_DATE, false),
+                getWrapper(params)
         );
 
         return getPageData(page, SysParamsDTO.class);
@@ -59,7 +59,7 @@ public class SysParamsServiceImpl extends BaseServiceImpl<SysParamsDao, SysParam
         return ConvertUtils.sourceToTarget(entityList, SysParamsDTO.class);
     }
 
-    private QueryWrapper<SysParamsEntity> getWrapper(Map<String, Object> params){
+    private QueryWrapper<SysParamsEntity> getWrapper(Map<String, Object> params) {
         String paramCode = (String) params.get("paramCode");
 
         QueryWrapper<SysParamsEntity> wrapper = new QueryWrapper<>();
@@ -109,7 +109,7 @@ public class SysParamsServiceImpl extends BaseServiceImpl<SysParamsDao, SysParam
     @Override
     public String getValue(String paramCode) {
         String paramValue = sysParamsRedis.get(paramCode);
-        if(paramValue == null){
+        if (paramValue == null) {
             paramValue = baseDao.getValueByCode(paramCode);
 
             sysParamsRedis.set(paramCode, paramValue);
@@ -120,7 +120,7 @@ public class SysParamsServiceImpl extends BaseServiceImpl<SysParamsDao, SysParam
     @Override
     public <T> T getValueObject(String paramCode, Class<T> clazz) {
         String paramValue = getValue(paramCode);
-        if(StrUtil.isNotBlank(paramValue)){
+        if (StrUtil.isNotBlank(paramValue)) {
             return JsonUtils.parseObject(paramValue, clazz);
         }
 
