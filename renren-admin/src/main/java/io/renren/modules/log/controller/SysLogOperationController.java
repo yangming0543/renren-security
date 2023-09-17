@@ -1,8 +1,8 @@
 /**
  * Copyright (c) 2018 人人开源 All rights reserved.
- *
+ * <p>
  * https://www.renren.io
- *
+ * <p>
  * 版权所有，侵权必究！
  */
 
@@ -41,7 +41,7 @@ import java.util.Map;
  */
 @RestController
 @RequestMapping("sys/log/operation")
-@Api(tags="操作日志")
+@Api(tags = "操作日志")
 public class SysLogOperationController {
     @Autowired
     private SysLogOperationService sysLogOperationService;
@@ -49,14 +49,14 @@ public class SysLogOperationController {
     @GetMapping("page")
     @ApiOperation("分页")
     @ApiImplicitParams({
-        @ApiImplicitParam(name = Constant.PAGE, value = "当前页码，从1开始", paramType = "query", required = true, dataType="int") ,
-        @ApiImplicitParam(name = Constant.LIMIT, value = "每页显示记录数", paramType = "query",required = true, dataType="int") ,
-        @ApiImplicitParam(name = Constant.ORDER_FIELD, value = "排序字段", paramType = "query", dataType="String") ,
-        @ApiImplicitParam(name = Constant.ORDER, value = "排序方式，可选值(asc、desc)", paramType = "query", dataType="String") ,
-        @ApiImplicitParam(name = "status", value = "状态  0：失败    1：成功", paramType = "query", dataType="int")
+            @ApiImplicitParam(name = Constant.PAGE, value = "当前页码，从1开始", paramType = "query", required = true, dataType = "int"),
+            @ApiImplicitParam(name = Constant.LIMIT, value = "每页显示记录数", paramType = "query", required = true, dataType = "int"),
+            @ApiImplicitParam(name = Constant.ORDER_FIELD, value = "排序字段", paramType = "query", dataType = "String"),
+            @ApiImplicitParam(name = Constant.ORDER, value = "排序方式，可选值(asc、desc)", paramType = "query", dataType = "String"),
+            @ApiImplicitParam(name = "status", value = "状态  0：失败    1：成功", paramType = "query", dataType = "int")
     })
     @RequiresPermissions("sys:log:operation")
-    public Result<PageData<SysLogOperationDTO>> page(@ApiIgnore @RequestParam Map<String, Object> params){
+    public Result<PageData<SysLogOperationDTO>> page(@ApiIgnore @RequestParam Map<String, Object> params) {
         PageData<SysLogOperationDTO> page = sysLogOperationService.page(params);
 
         return new Result<PageData<SysLogOperationDTO>>().ok(page);
@@ -69,7 +69,7 @@ public class SysLogOperationController {
     public void export(@ApiIgnore @RequestParam Map<String, Object> params, HttpServletResponse response) throws Exception {
         List<SysLogOperationDTO> list = sysLogOperationService.list(params);
 
-        ExcelUtils.exportExcelToTarget(response, null, list, SysLogOperationExcel.class);
+        ExcelUtils.exportExcelToTarget(response, null, "操作日志", list, SysLogOperationExcel.class);
     }
 
 }

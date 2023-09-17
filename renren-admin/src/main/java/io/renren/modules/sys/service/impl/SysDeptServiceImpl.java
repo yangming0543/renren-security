@@ -8,6 +8,7 @@
 
 package io.renren.modules.sys.service.impl;
 
+import com.qiniu.util.StringUtils;
 import io.renren.common.constant.Constant;
 import io.renren.common.exception.ErrorCode;
 import io.renren.common.exception.RenException;
@@ -22,7 +23,6 @@ import io.renren.modules.sys.dto.SysDeptDTO;
 import io.renren.modules.sys.entity.SysDeptEntity;
 import io.renren.modules.sys.enums.SuperAdminEnum;
 import io.renren.modules.sys.service.SysDeptService;
-import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -124,6 +124,7 @@ public class SysDeptServiceImpl extends BaseServiceImpl<SysDeptDao, SysDeptEntit
 
     /**
      * 获取所有上级部门ID
+     *
      * @param pid 上级ID
      */
     private String getPidList(Long pid) {
