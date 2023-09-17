@@ -18,7 +18,7 @@ import io.renren.modules.log.dao.SysLogLoginDao;
 import io.renren.modules.log.dto.SysLogLoginDTO;
 import io.renren.modules.log.entity.SysLogLoginEntity;
 import io.renren.modules.log.service.SysLogLoginService;
-import org.apache.commons.lang3.StringUtils;
+import cn.hutool.core.util.StrUtil;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -56,8 +56,8 @@ public class SysLogLoginServiceImpl extends BaseServiceImpl<SysLogLoginDao, SysL
         String creatorName = (String) params.get("creatorName");
 
         QueryWrapper<SysLogLoginEntity> wrapper = new QueryWrapper<>();
-        wrapper.eq(StringUtils.isNotBlank(status), "status", status);
-        wrapper.like(StringUtils.isNotBlank(creatorName), "creator_name", creatorName);
+        wrapper.eq(StrUtil.isNotBlank(status), "status", status);
+        wrapper.like(StrUtil.isNotBlank(creatorName), "creator_name", creatorName);
 
         return wrapper;
     }

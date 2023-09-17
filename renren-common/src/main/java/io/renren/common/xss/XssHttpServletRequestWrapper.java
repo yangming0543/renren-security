@@ -8,8 +8,8 @@
 
 package io.renren.common.xss;
 
-import org.apache.commons.io.IOUtils;
-import org.apache.commons.lang3.StringUtils;
+import cn.hutool.core.io.IoUtil;
+import cn.hutool.core.util.StrUtil;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
 
@@ -46,8 +46,8 @@ public class XssHttpServletRequestWrapper extends HttpServletRequestWrapper {
         }
 
         //为空，直接返回
-        String json = IOUtils.toString(super.getInputStream(), StandardCharsets.UTF_8);
-        if (StringUtils.isBlank(json)) {
+        String json = IoUtil.readUtf8(super.getInputStream());
+        if (StrUtil.isBlank(json)) {
             return super.getInputStream();
         }
 
@@ -80,7 +80,7 @@ public class XssHttpServletRequestWrapper extends HttpServletRequestWrapper {
     @Override
     public String getParameter(String name) {
         String value = super.getParameter(xssEncode(name));
-        if (StringUtils.isNotBlank(value)) {
+        if (StrUtil.isNotBlank(value)) {
             value = xssEncode(value);
         }
         return value;
@@ -116,7 +116,7 @@ public class XssHttpServletRequestWrapper extends HttpServletRequestWrapper {
     @Override
     public String getHeader(String name) {
         String value = super.getHeader(xssEncode(name));
-        if (StringUtils.isNotBlank(value)) {
+        if (StrUtil.isNotBlank(value)) {
             value = xssEncode(value);
         }
         return value;
@@ -149,6 +149,6 @@ public class XssHttpServletRequestWrapper extends HttpServletRequestWrapper {
     private boolean checkContentTypeIsJson()
     {
         String header = super.getHeader(HttpHeaders.CONTENT_TYPE);
-        return StringUtils.startsWithIgnoreCase(header, MediaType.APPLICATION_JSON_VALUE);
+        return StrUtil.startWithIgnoreCase(header, MediaType.APPLICATION_JSON_VALUE);
     }
 }

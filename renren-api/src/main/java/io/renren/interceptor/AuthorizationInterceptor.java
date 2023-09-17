@@ -13,7 +13,7 @@ import io.renren.common.exception.ErrorCode;
 import io.renren.common.exception.RenException;
 import io.renren.entity.TokenEntity;
 import io.renren.service.TokenService;
-import org.apache.commons.lang3.StringUtils;
+import cn.hutool.core.util.StrUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.web.method.HandlerMethod;
@@ -50,12 +50,12 @@ public class AuthorizationInterceptor extends HandlerInterceptorAdapter {
         //从header中获取token
         String token = request.getHeader("token");
         //如果header中不存在token，则从参数中获取token
-        if(StringUtils.isBlank(token)){
+        if(StrUtil.isBlank(token)){
             token = request.getParameter("token");
         }
 
         //token为空
-        if(StringUtils.isBlank(token)){
+        if(StrUtil.isBlank(token)){
             throw new RenException(ErrorCode.TOKEN_NOT_EMPTY);
         }
 

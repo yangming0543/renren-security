@@ -17,7 +17,7 @@ import io.renren.modules.sys.entity.SysUserEntity;
 import io.renren.modules.security.entity.SysUserTokenEntity;
 import io.renren.modules.security.service.ShiroService;
 import io.renren.modules.sys.enums.SuperAdminEnum;
-import org.apache.commons.lang3.StringUtils;
+import cn.hutool.core.util.StrUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -48,7 +48,7 @@ public class ShiroServiceImpl implements ShiroService {
         //用户权限列表
         Set<String> permsSet = new HashSet<>();
         for(String permissions : permissionsList){
-            if(StringUtils.isBlank(permissions)){
+            if(StrUtil.isBlank(permissions)){
                 continue;
             }
             permsSet.addAll(Arrays.asList(permissions.trim().split(",")));

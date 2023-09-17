@@ -23,7 +23,7 @@ import io.renren.modules.sys.enums.SuperAdminEnum;
 import io.renren.modules.sys.service.SysDeptService;
 import io.renren.modules.sys.service.SysRoleUserService;
 import io.renren.modules.sys.service.SysUserService;
-import org.apache.commons.lang3.StringUtils;
+import cn.hutool.core.util.StrUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -114,7 +114,7 @@ public class SysUserServiceImpl extends BaseServiceImpl<SysUserDao, SysUserEntit
 		SysUserEntity entity = ConvertUtils.sourceToTarget(dto, SysUserEntity.class);
 
 		//密码加密
-		if(StringUtils.isBlank(dto.getPassword())){
+		if(StrUtil.isBlank(dto.getPassword())){
 			entity.setPassword(null);
 		}else{
 			String password = PasswordUtils.encode(entity.getPassword());

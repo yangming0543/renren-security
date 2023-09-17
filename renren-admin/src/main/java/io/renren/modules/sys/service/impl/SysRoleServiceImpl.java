@@ -21,7 +21,7 @@ import io.renren.modules.sys.dto.SysRoleDTO;
 import io.renren.modules.sys.entity.SysRoleEntity;
 import io.renren.modules.sys.enums.SuperAdminEnum;
 import io.renren.modules.sys.service.*;
-import org.apache.commons.lang3.StringUtils;
+import cn.hutool.core.util.StrUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -67,7 +67,7 @@ public class SysRoleServiceImpl extends BaseServiceImpl<SysRoleDao, SysRoleEntit
 		String name = (String)params.get("name");
 
 		QueryWrapper<SysRoleEntity> wrapper = new QueryWrapper<>();
-		wrapper.like(StringUtils.isNotBlank(name), "name", name);
+		wrapper.like(StrUtil.isNotBlank(name), "name", name);
 
 		//普通管理员，只能查询所属部门及子部门的数据
 		UserDetail user = SecurityUser.getUser();

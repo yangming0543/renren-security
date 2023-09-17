@@ -18,7 +18,7 @@ import io.renren.modules.log.dao.SysLogOperationDao;
 import io.renren.modules.log.dto.SysLogOperationDTO;
 import io.renren.modules.log.entity.SysLogOperationEntity;
 import io.renren.modules.log.service.SysLogOperationService;
-import org.apache.commons.lang3.StringUtils;
+import cn.hutool.core.util.StrUtil;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -55,7 +55,7 @@ public class SysLogOperationServiceImpl extends BaseServiceImpl<SysLogOperationD
         String status = (String) params.get("status");
 
         QueryWrapper<SysLogOperationEntity> wrapper = new QueryWrapper<>();
-        wrapper.eq(StringUtils.isNotBlank(status), "status", status);
+        wrapper.eq(StrUtil.isNotBlank(status), "status", status);
 
         return wrapper;
     }

@@ -1,19 +1,19 @@
 /**
  * Copyright (c) 2018 人人开源 All rights reserved.
- *
+ * <p>
  * https://www.renren.io
- *
+ * <p>
  * 版权所有，侵权必究！
  */
 
 package io.renren.modules.security.oauth2;
 
-import com.google.gson.Gson;
+import cn.hutool.core.util.StrUtil;
 import io.renren.common.constant.Constant;
 import io.renren.common.exception.ErrorCode;
 import io.renren.common.utils.HttpContextUtils;
+import io.renren.common.utils.JsonUtils;
 import io.renren.common.utils.Result;
-import org.apache.commons.lang3.StringUtils;
 import org.apache.http.HttpStatus;
 import org.apache.shiro.authc.AuthenticationException;
 import org.apache.shiro.authc.AuthenticationToken;
@@ -38,7 +38,7 @@ public class Oauth2Filter extends AuthenticatingFilter {
         //获取请求token
         String token = getRequestToken((HttpServletRequest) request);
 
-        if(StringUtils.isBlank(token)){
+        if (StrUtil.isBlank(token)) {
             return null;
         }
 
@@ -47,7 +47,7 @@ public class Oauth2Filter extends AuthenticatingFilter {
 
     @Override
     protected boolean isAccessAllowed(ServletRequest request, ServletResponse response, Object mappedValue) {
-        if(((HttpServletRequest) request).getMethod().equals(RequestMethod.OPTIONS.name())){
+        if (((HttpServletRequest) request).getMethod().equals(RequestMethod.OPTIONS.name())) {
             return true;
         }
 
@@ -58,13 +58,13 @@ public class Oauth2Filter extends AuthenticatingFilter {
     protected boolean onAccessDenied(ServletRequest request, ServletResponse response) throws Exception {
         //获取请求token，如果token不存在，直接返回401
         String token = getRequestToken((HttpServletRequest) request);
-        if(StringUtils.isBlank(token)){
+        if (StrUtil.isBlank(token)) {
             HttpServletResponse httpResponse = (HttpServletResponse) response;
             httpResponse.setContentType("application/json;charset=utf-8");
             httpResponse.setHeader("Access-Control-Allow-Credentials", "true");
             httpResponse.setHeader("Access-Control-Allow-Origin", HttpContextUtils.getOrigin());
 
-            String json = new Gson().toJson(new Result().error(ErrorCode.UNAUTHORIZED));
+            String json = JsonUtils.toJsonString(new Result().error(ErrorCode.UNAUTHORIZED));
 
             httpResponse.getWriter().print(json);
 
@@ -85,7 +85,7 @@ public class Oauth2Filter extends AuthenticatingFilter {
             Throwable throwable = e.getCause() == null ? e : e.getCause();
             Result r = new Result().error(HttpStatus.SC_UNAUTHORIZED, throwable.getMessage());
 
-            String json = new Gson().toJson(r);
+            String json = JsonUtils.toJsonString(r);
             httpResponse.getWriter().print(json);
         } catch (IOException e1) {
 
@@ -97,12 +97,12 @@ public class Oauth2Filter extends AuthenticatingFilter {
     /**
      * 获取请求的token
      */
-    private String getRequestToken(HttpServletRequest httpRequest){
+    private String getRequestToken(HttpServletRequest httpRequest) {
         //从header中获取token
         String token = httpRequest.getHeader(Constant.TOKEN_HEADER);
 
         //如果header中不存在token，则从参数中获取token
-        if(StringUtils.isBlank(token)){
+        if (StrUtil.isBlank(token)) {
             token = httpRequest.getParameter(Constant.TOKEN_HEADER);
         }
 

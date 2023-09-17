@@ -19,7 +19,7 @@ import io.renren.modules.job.dto.ScheduleJobDTO;
 import io.renren.modules.job.entity.ScheduleJobEntity;
 import io.renren.modules.job.service.ScheduleJobService;
 import io.renren.modules.job.utils.ScheduleUtils;
-import org.apache.commons.lang3.StringUtils;
+import cn.hutool.core.util.StrUtil;
 import org.quartz.Scheduler;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -52,7 +52,7 @@ public class ScheduleJobServiceImpl extends BaseServiceImpl<ScheduleJobDao, Sche
 		String beanName = (String)params.get("beanName");
 
 		QueryWrapper<ScheduleJobEntity> wrapper = new QueryWrapper<>();
-		wrapper.like(StringUtils.isNotBlank(beanName), "bean_name", beanName);
+		wrapper.like(StrUtil.isNotBlank(beanName), "bean_name", beanName);
 
 		return wrapper;
 	}

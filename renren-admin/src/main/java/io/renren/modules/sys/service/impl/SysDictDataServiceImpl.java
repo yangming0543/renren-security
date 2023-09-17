@@ -17,7 +17,7 @@ import io.renren.modules.sys.dao.SysDictDataDao;
 import io.renren.modules.sys.dto.SysDictDataDTO;
 import io.renren.modules.sys.entity.SysDictDataEntity;
 import io.renren.modules.sys.service.SysDictDataService;
-import org.apache.commons.lang3.StringUtils;
+import cn.hutool.core.util.StrUtil;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -49,8 +49,8 @@ public class SysDictDataServiceImpl extends BaseServiceImpl<SysDictDataDao, SysD
 
         QueryWrapper<SysDictDataEntity> wrapper = new QueryWrapper<>();
         wrapper.eq("dict_type_id", dictTypeId);
-        wrapper.like(StringUtils.isNotBlank(dictLabel), "dict_label", dictLabel);
-        wrapper.like(StringUtils.isNotBlank(dictValue), "dict_value", dictValue);
+        wrapper.like(StrUtil.isNotBlank(dictLabel), "dict_label", dictLabel);
+        wrapper.like(StrUtil.isNotBlank(dictValue), "dict_value", dictValue);
 
         return wrapper;
     }

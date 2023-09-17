@@ -20,7 +20,7 @@ import io.renren.modules.sys.entity.DictData;
 import io.renren.modules.sys.entity.DictType;
 import io.renren.modules.sys.entity.SysDictTypeEntity;
 import io.renren.modules.sys.service.SysDictTypeService;
-import org.apache.commons.lang3.StringUtils;
+import cn.hutool.core.util.StrUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -53,8 +53,8 @@ public class SysDictTypeServiceImpl extends BaseServiceImpl<SysDictTypeDao, SysD
         String dictName = (String) params.get("dictName");
 
         QueryWrapper<SysDictTypeEntity> wrapper = new QueryWrapper<>();
-        wrapper.like(StringUtils.isNotBlank(dictType), "dict_type", dictType);
-        wrapper.like(StringUtils.isNotBlank(dictName), "dict_name", dictName);
+        wrapper.like(StrUtil.isNotBlank(dictType), "dict_type", dictType);
+        wrapper.like(StrUtil.isNotBlank(dictName), "dict_name", dictName);
 
         return wrapper;
     }

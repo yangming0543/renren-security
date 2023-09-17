@@ -18,7 +18,7 @@ import io.renren.modules.job.dao.ScheduleJobLogDao;
 import io.renren.modules.job.dto.ScheduleJobLogDTO;
 import io.renren.modules.job.entity.ScheduleJobLogEntity;
 import io.renren.modules.job.service.ScheduleJobLogService;
-import org.apache.commons.lang3.StringUtils;
+import cn.hutool.core.util.StrUtil;
 import org.springframework.stereotype.Service;
 
 import java.util.Map;
@@ -39,7 +39,7 @@ public class ScheduleJobLogServiceImpl extends BaseServiceImpl<ScheduleJobLogDao
 		String jobId = (String)params.get("jobId");
 
 		QueryWrapper<ScheduleJobLogEntity> wrapper = new QueryWrapper<>();
-		wrapper.eq(StringUtils.isNotBlank(jobId), "job_id", jobId);
+		wrapper.eq(StrUtil.isNotBlank(jobId), "job_id", jobId);
 
 		return wrapper;
 	}

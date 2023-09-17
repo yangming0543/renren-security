@@ -10,7 +10,7 @@ package io.renren.common.utils;
 
 import cn.afterturn.easypoi.excel.ExcelExportUtil;
 import cn.afterturn.easypoi.excel.entity.ExportParams;
-import org.apache.commons.lang3.StringUtils;
+import cn.hutool.core.util.StrUtil;
 import org.apache.poi.ss.usermodel.Workbook;
 import org.springframework.beans.BeanUtils;
 
@@ -40,7 +40,7 @@ public class ExcelUtils {
      */
     public static void exportExcel(HttpServletResponse response, String fileName, Collection<?> list,
                                      Class<?> pojoClass) throws IOException {
-        if(StringUtils.isBlank(fileName)){
+        if(StrUtil.isBlank(fileName)){
             //当前日期
             fileName = DateUtils.format(new Date());
         }

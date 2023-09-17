@@ -22,7 +22,7 @@ import io.renren.modules.sys.dto.SysParamsDTO;
 import io.renren.modules.sys.entity.SysParamsEntity;
 import io.renren.modules.sys.redis.SysParamsRedis;
 import io.renren.modules.sys.service.SysParamsService;
-import org.apache.commons.lang3.StringUtils;
+import cn.hutool.core.util.StrUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -64,7 +64,7 @@ public class SysParamsServiceImpl extends BaseServiceImpl<SysParamsDao, SysParam
 
         QueryWrapper<SysParamsEntity> wrapper = new QueryWrapper<>();
         wrapper.eq("param_type", 1);
-        wrapper.like(StringUtils.isNotBlank(paramCode), "param_code", paramCode);
+        wrapper.like(StrUtil.isNotBlank(paramCode), "param_code", paramCode);
 
         return wrapper;
     }
@@ -120,7 +120,7 @@ public class SysParamsServiceImpl extends BaseServiceImpl<SysParamsDao, SysParam
     @Override
     public <T> T getValueObject(String paramCode, Class<T> clazz) {
         String paramValue = getValue(paramCode);
-        if(StringUtils.isNotBlank(paramValue)){
+        if(StrUtil.isNotBlank(paramValue)){
             return JsonUtils.parseObject(paramValue, clazz);
         }
 

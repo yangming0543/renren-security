@@ -1,13 +1,14 @@
 /**
  * Copyright (c) 2018 人人开源 All rights reserved.
- *
+ * <p>
  * https://www.renren.io
- *
+ * <p>
  * 版权所有，侵权必究！
  */
 
 package io.renren.common.service.impl;
 
+import cn.hutool.core.util.StrUtil;
 import com.baomidou.mybatisplus.core.conditions.Wrapper;
 import com.baomidou.mybatisplus.core.enums.SqlMethod;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
@@ -15,7 +16,6 @@ import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.core.metadata.OrderItem;
 import com.baomidou.mybatisplus.core.toolkit.Constants;
 import com.baomidou.mybatisplus.core.toolkit.ReflectionKit;
-import com.baomidou.mybatisplus.core.toolkit.StringUtils;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.toolkit.SqlHelper;
 import io.renren.common.constant.Constant;
@@ -40,7 +40,7 @@ import java.util.function.BiConsumer;
  *
  * @author Mark sunlightcs@gmail.com
  */
-public abstract class BaseServiceImpl<M extends BaseMapper<T>, T>  implements BaseService<T> {
+public abstract class BaseServiceImpl<M extends BaseMapper<T>, T> implements BaseService<T> {
     @Autowired
     protected M baseDao;
     protected Log log = LogFactory.getLog(getClass());
@@ -56,11 +56,11 @@ public abstract class BaseServiceImpl<M extends BaseMapper<T>, T>  implements Ba
         long curPage = 1;
         long limit = 10;
 
-        if(params.get(Constant.PAGE) != null){
-            curPage = Long.parseLong((String)params.get(Constant.PAGE));
+        if (params.get(Constant.PAGE) != null) {
+            curPage = Long.parseLong((String) params.get(Constant.PAGE));
         }
-        if(params.get(Constant.LIMIT) != null){
-            limit = Long.parseLong((String)params.get(Constant.LIMIT));
+        if (params.get(Constant.LIMIT) != null) {
+            limit = Long.parseLong((String) params.get(Constant.LIMIT));
         }
 
         //分页对象
@@ -70,49 +70,49 @@ public abstract class BaseServiceImpl<M extends BaseMapper<T>, T>  implements Ba
         params.put(Constant.PAGE, page);
 
         //排序字段
-        String orderField = (String)params.get(Constant.ORDER_FIELD);
-        String order = (String)params.get(Constant.ORDER);
+        String orderField = (String) params.get(Constant.ORDER_FIELD);
+        String order = (String) params.get(Constant.ORDER);
 
         //前端字段排序
-        if(StringUtils.isNotBlank(orderField) && StringUtils.isNotBlank(order)){
-            if(Constant.ASC.equalsIgnoreCase(order)) {
+        if (StrUtil.isNotBlank(orderField) && StrUtil.isNotBlank(order)) {
+            if (Constant.ASC.equalsIgnoreCase(order)) {
                 return page.addOrder(OrderItem.asc(orderField));
-            }else {
+            } else {
                 return page.addOrder(OrderItem.desc(orderField));
             }
         }
 
         //没有排序字段，则不排序
-        if(StringUtils.isBlank(defaultOrderField)){
+        if (StrUtil.isBlank(defaultOrderField)) {
             return page;
         }
 
         //默认排序
-        if(isAsc) {
+        if (isAsc) {
             page.addOrder(OrderItem.asc(defaultOrderField));
-        }else {
+        } else {
             page.addOrder(OrderItem.desc(defaultOrderField));
         }
 
         return page;
     }
 
-    protected <T> PageData<T> getPageData(List<?> list, long total, Class<T> target){
+    protected <T> PageData<T> getPageData(List<?> list, long total, Class<T> target) {
         List<T> targetList = ConvertUtils.sourceToTarget(list, target);
 
         return new PageData<>(targetList, total);
     }
 
-    protected <T> PageData<T> getPageData(IPage page, Class<T> target){
+    protected <T> PageData<T> getPageData(IPage page, Class<T> target) {
         return getPageData(page.getRecords(), page.getTotal(), target);
     }
 
-    protected void paramsToLike(Map<String, Object> params, String... likes){
-        for (String like : likes){
-            String val = (String)params.get(like);
-            if (StringUtils.isNotBlank(val)){
+    protected void paramsToLike(Map<String, Object> params, String... likes) {
+        for (String like : likes) {
+            String val = (String) params.get(like);
+            if (StrUtil.isNotBlank(val)) {
                 params.put(like, "%" + val + "%");
-            }else {
+            } else {
                 params.put(like, null);
             }
         }
@@ -139,7 +139,7 @@ public abstract class BaseServiceImpl<M extends BaseMapper<T>, T>  implements Ba
 
     @Override
     public Class<T> currentModelClass() {
-        return (Class<T>)ReflectionKit.getSuperClassGenericType(this.getClass(), BaseServiceImpl.class, 1);
+        return (Class<T>) ReflectionKit.getSuperClassGenericType(this.getClass(), BaseServiceImpl.class, 1);
     }
 
     protected String getSqlStatement(SqlMethod sqlMethod) {

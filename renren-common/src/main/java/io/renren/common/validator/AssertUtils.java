@@ -13,7 +13,7 @@ import cn.hutool.core.map.MapUtil;
 import cn.hutool.core.util.ArrayUtil;
 import io.renren.common.exception.ErrorCode;
 import io.renren.common.exception.RenException;
-import org.apache.commons.lang3.StringUtils;
+import cn.hutool.core.util.StrUtil;
 
 import java.util.List;
 import java.util.Map;
@@ -35,7 +35,7 @@ public class AssertUtils {
             throw new RenException(ErrorCode.NOT_NULL, "code");
         }
 
-        if (StringUtils.isBlank(str)) {
+        if (StrUtil.isBlank(str)) {
             throw new RenException(code, params);
         }
     }
