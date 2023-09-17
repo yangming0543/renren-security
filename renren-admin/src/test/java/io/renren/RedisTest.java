@@ -1,16 +1,16 @@
 /**
  * Copyright (c) 2018 人人开源 All rights reserved.
- *
+ * <p>
  * https://www.renren.io
- *
+ * <p>
  * 版权所有，侵权必究！
  */
 
 package io.renren;
 
+import cn.hutool.core.util.StrUtil;
 import io.renren.common.redis.RedisUtils;
 import io.renren.modules.sys.entity.SysUserEntity;
-import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,7 +29,7 @@ public class RedisTest {
         user.setEmail("123456@qq.com");
         redisUtils.set("user", user);
 
-        System.out.println(ToStringBuilder.reflectionToString(redisUtils.get("user")));
+        System.out.println(StrUtil.toString(redisUtils.get("user")));
     }
 
 }

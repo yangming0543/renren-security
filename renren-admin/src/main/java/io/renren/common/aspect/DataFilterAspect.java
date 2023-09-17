@@ -10,6 +10,7 @@ package io.renren.common.aspect;
 
 import cn.hutool.core.collection.CollUtil;
 import cn.hutool.core.util.StrUtil;
+import com.qiniu.util.StringUtils;
 import io.renren.common.annotation.DataFilter;
 import io.renren.common.constant.Constant;
 import io.renren.common.exception.ErrorCode;
@@ -18,7 +19,6 @@ import io.renren.common.interceptor.DataScope;
 import io.renren.modules.security.user.SecurityUser;
 import io.renren.modules.security.user.UserDetail;
 import io.renren.modules.sys.enums.SuperAdminEnum;
-import org.apache.commons.lang3.StringUtils;
 import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.annotation.Before;
