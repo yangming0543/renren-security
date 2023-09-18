@@ -30,11 +30,6 @@
           <el-option v-for="role in roleList" :key="role.id" :label="role.name" :value="role.id"></el-option>
         </el-select>
       </el-form-item>
-      <el-form-item prop="postIdList" label="所在岗位" class="role-list">
-        <el-select v-model="dataForm.postIdList" multiple placeholder="所在岗位">
-          <el-option v-for="post in postList" :key="post.id" :label="post.postName" :value="post.id"></el-option>
-        </el-select>
-      </el-form-item>
       <el-form-item prop="status" label="状态">
         <el-radio-group v-model="dataForm.status">
           <el-radio :label="0">停用</el-radio>
@@ -59,7 +54,6 @@ const emit = defineEmits(["refreshDataList"]);
 
 const visible = ref(false);
 const roleList = ref<any[]>([]);
-const postList = ref<any[]>([]);
 const dataFormRef = ref();
 
 const dataForm = reactive({
@@ -74,7 +68,6 @@ const dataForm = reactive({
   email: "",
   mobile: "",
   roleIdList: [] as IObject[],
-  postIdList: [] as IObject[],
   status: 1
 });
 
@@ -125,7 +118,7 @@ const init = (id?: number) => {
     dataFormRef.value.resetFields();
   }
 
-  Promise.all([getRoleList(), getPostList()]).then(() => {
+  Promise.all([getRoleList()]).then(() => {
     if (id) {
       getInfo(id);
     }
@@ -136,13 +129,6 @@ const init = (id?: number) => {
 const getRoleList = () => {
   return baseService.get("/sys/role/list").then((res) => {
     roleList.value = res.data;
-  });
-};
-
-// 获取岗位列表
-const getPostList = () => {
-  return baseService.get("/sys/post/list").then((res) => {
-    postList.value = res.data;
   });
 };
 
