@@ -75,7 +75,7 @@ renren-security
 
 **技术选型：**
 - 核心框架：Spring Boot 2.7
-- 安全框架：Apache Shiro 1.10
+- 安全框架：Apache Shiro 1.12
 - 持久层框架：MyBatis 3.5
 - 定时器：Quartz 2.3
 - 数据库连接池：Druid 1.2
@@ -89,7 +89,7 @@ renren-security
 - Maven3.0+
 - MySQL8.0
 - Oracle 11g+
-- SQL Server 2012+
+- SQLServer 2012+
 - PostgreSQL 9.4+
 - 达梦8
 <br>
