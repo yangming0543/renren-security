@@ -1,6 +1,9 @@
 package ${package}.modules.${moduleName}.excel;
 
-import cn.afterturn.easypoi.excel.annotation.Excel;
+import com.alibaba.excel.annotation.ExcelProperty;
+import com.alibaba.excel.annotation.write.style.ColumnWidth;
+import com.alibaba.excel.annotation.write.style.ContentRowHeight;
+import com.alibaba.excel.annotation.write.style.HeadRowHeight;
 import lombok.Data;
 
 #if(${hasBigDecimal})
@@ -17,7 +20,7 @@ import java.util.Date;
 @Data
 public class ${className}Excel {
 #foreach ($column in $columns)
-    @Excel(name = "$!column.comments")
+    @ExcelProperty(value = "$!column.comments")
     private $column.attrType $column.attrname;
 #end
 

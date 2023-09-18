@@ -110,7 +110,7 @@ public class ${className}Controller {
     public void export(@ApiIgnore @RequestParam Map<String, Object> params, HttpServletResponse response) throws Exception {
         List<${className}DTO> list = ${classname}Service.list(params);
 
-        ExcelUtils.exportExcelToTarget(response, null, list, ${className}Excel.class);
+        ExcelUtils.exportExcelToTarget(response, null, "${comments}", list, ${className}Excel.class);
     }
 
 }
