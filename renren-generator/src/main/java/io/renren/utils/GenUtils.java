@@ -37,20 +37,20 @@ public class GenUtils {
 
     public static List<String> getTemplates() {
         List<String> templates = new ArrayList<String>();
-        templates.add("template/DTO.java.vm");
-        templates.add("template/Entity.java.vm");
-        templates.add("template/Dao.java.vm");
-        templates.add("template/Dao.xml.vm");
-        templates.add("template/Service.java.vm");
-        templates.add("template/ServiceImpl.java.vm");
-        templates.add("template/Controller.java.vm");
-        templates.add("template/Excel.java.vm");
-        templates.add("template/index.vue.vm");
-        templates.add("template/add-or-update.vue.vm");
-        templates.add("template/mysql.vm");
-        templates.add("template/sqlserver.vm");
-        templates.add("template/oracle.vm");
-        templates.add("template/postgresql.vm");
+        templates.add("template/DTO.java.vm" );
+        templates.add("template/Entity.java.vm" );
+        templates.add("template/Dao.java.vm" );
+        templates.add("template/Dao.xml.vm" );
+        templates.add("template/Service.java.vm" );
+        templates.add("template/ServiceImpl.java.vm" );
+        templates.add("template/Controller.java.vm" );
+        templates.add("template/Excel.java.vm" );
+        templates.add("template/index.vue.vm" );
+        templates.add("template/add-or-update.vue.vm" );
+        templates.add("template/mysql.vm" );
+        templates.add("template/sqlserver.vm" );
+        templates.add("template/oracle.vm" );
+        templates.add("template/postgresql.vm" );
         return templates;
     }
 
@@ -64,10 +64,10 @@ public class GenUtils {
         boolean hasBigDecimal = false;
         //表信息
         TableEntity tableEntity = new TableEntity();
-        tableEntity.setTableName(table.get("tableName"));
-        tableEntity.setComments(table.get("tableComment"));
+        tableEntity.setTableName(table.get("tableName" ));
+        tableEntity.setComments(table.get("tableComment" ));
         //表名转换成Java类名
-        String className = tableToJava(tableEntity.getTableName(), config.getString("tablePrefix"));
+        String className = tableToJava(tableEntity.getTableName(), config.getString("tablePrefix" ));
         tableEntity.setClassName(className);
         tableEntity.setClassname(StringUtils.uncapitalize(className));
 
@@ -75,10 +75,10 @@ public class GenUtils {
         List<ColumnEntity> columnsList = new ArrayList<>();
         for (Map<String, String> column : columns) {
             ColumnEntity columnEntity = new ColumnEntity();
-            columnEntity.setColumnName(column.get("columnName"));
-            columnEntity.setDataType(column.get("dataType"));
-            columnEntity.setComments(column.get("columnComment"));
-            columnEntity.setExtra(column.get("extra"));
+            columnEntity.setColumnName(column.get("columnName" ));
+            columnEntity.setDataType(column.get("dataType" ));
+            columnEntity.setComments(column.get("columnComment" ));
+            columnEntity.setExtra(column.get("extra" ));
 
             //列名转换成Java属性名
             String attrName = columnToJava(columnEntity.getColumnName());
@@ -86,13 +86,13 @@ public class GenUtils {
             columnEntity.setAttrname(StringUtils.uncapitalize(attrName));
 
             //列的数据类型，转换成Java类型
-            String attrType = config.getString(columnEntity.getDataType(), "unknowType");
+            String attrType = config.getString(columnEntity.getDataType(), "unknowType" );
             columnEntity.setAttrType(attrType);
-            if (!hasBigDecimal && attrType.equals("BigDecimal")) {
+            if (!hasBigDecimal && attrType.equals("BigDecimal" )) {
                 hasBigDecimal = true;
             }
             //是否主键
-            if ("PRI".equalsIgnoreCase(column.get("columnKey")) && tableEntity.getPk() == null) {
+            if ("PRI".equalsIgnoreCase(column.get("columnKey" )) && tableEntity.getPk() == null) {
                 tableEntity.setPk(columnEntity);
             }
 
@@ -107,26 +107,26 @@ public class GenUtils {
 
         //设置velocity资源加载器
         Properties prop = new Properties();
-        prop.put("file.resource.loader.class", "org.apache.velocity.runtime.resource.loader.ClasspathResourceLoader");
+        prop.put("file.resource.loader.class" , "org.apache.velocity.runtime.resource.loader.ClasspathResourceLoader" );
         Velocity.init(prop);
 
         //封装模板数据
         Map<String, Object> map = new HashMap<>();
-        map.put("tableName", tableEntity.getTableName());
-        map.put("comments", tableEntity.getComments());
-        map.put("pk", tableEntity.getPk());
-        map.put("className", tableEntity.getClassName());
-        map.put("classname", tableEntity.getClassname());
-        map.put("pathName", tableEntity.getClassname().toLowerCase());
-        map.put("columns", tableEntity.getColumns());
-        map.put("hasBigDecimal", hasBigDecimal);
-        map.put("version", config.getString("version"));
-        map.put("package", config.getString("package"));
-        map.put("moduleName", config.getString("moduleName"));
-        map.put("author", config.getString("author"));
-        map.put("email", config.getString("email"));
-        map.put("datetime", DateUtils.format(new Date(), DateUtils.DATE_TIME_PATTERN));
-        map.put("date", DateUtils.format(new Date(), DateUtils.DATE_PATTERN));
+        map.put("tableName" , tableEntity.getTableName());
+        map.put("comments" , tableEntity.getComments());
+        map.put("pk" , tableEntity.getPk());
+        map.put("className" , tableEntity.getClassName());
+        map.put("classname" , tableEntity.getClassname());
+        map.put("pathName" , tableEntity.getClassname().toLowerCase());
+        map.put("columns" , tableEntity.getColumns());
+        map.put("hasBigDecimal" , hasBigDecimal);
+        map.put("version" , config.getString("version" ));
+        map.put("package" , config.getString("package" ));
+        map.put("moduleName" , config.getString("moduleName" ));
+        map.put("author" , config.getString("author" ));
+        map.put("email" , config.getString("email" ));
+        map.put("datetime" , DateUtils.format(new Date(), DateUtils.DATE_TIME_PATTERN));
+        map.put("date" , DateUtils.format(new Date(), DateUtils.DATE_PATTERN));
 
         for (int i = 0; i <= 10; i++) {
             map.put("id" + i, IdWorker.getId());
@@ -139,12 +139,12 @@ public class GenUtils {
         for (String template : templates) {
             //渲染模板
             StringWriter sw = new StringWriter();
-            Template tpl = Velocity.getTemplate(template, "UTF-8");
+            Template tpl = Velocity.getTemplate(template, "UTF-8" );
             tpl.merge(context, sw);
 
             try {
                 //添加到zip
-                zip.putNextEntry(new ZipEntry(getFileName(template, tableEntity.getClassName(), config.getString("package"), config.getString("moduleName"))));
+                zip.putNextEntry(new ZipEntry(getFileName(template, tableEntity.getClassName(), config.getString("package" ), config.getString("moduleName" ))));
                 IoUtil.writeUtf8(zip, false, sw.toString());
                 zip.flush();
                 IoUtil.close(sw);
@@ -160,7 +160,7 @@ public class GenUtils {
      * 列名转换成Java属性名
      */
     public static String columnToJava(String columnName) {
-        return WordUtils.capitalizeFully(columnName, new char[]{'_'}).replace("_", "");
+        return WordUtils.capitalizeFully(columnName, new char[]{'_'}).replace("_" , "" );
     }
 
     /**
@@ -168,7 +168,7 @@ public class GenUtils {
      */
     public static String tableToJava(String tableName, String tablePrefix) {
         if (StrUtil.isNotBlank(tablePrefix)) {
-            tableName = tableName.startsWith(tablePrefix) ? tableName.replaceFirst(tablePrefix, "") : tableName;
+            tableName = tableName.startsWith(tablePrefix) ? tableName.replaceFirst(tablePrefix, "" ) : tableName;
         }
         return columnToJava(tableName);
     }
@@ -178,9 +178,9 @@ public class GenUtils {
      */
     public static Configuration getConfig() {
         try {
-            return new PropertiesConfiguration("generator.properties");
+            return new PropertiesConfiguration("generator.properties" );
         } catch (ConfigurationException e) {
-            throw new RenException("获取配置文件失败，", e);
+            throw new RenException("获取配置文件失败，" , e);
         }
     }
 
@@ -190,64 +190,62 @@ public class GenUtils {
     public static String getFileName(String template, String className, String packageName, String moduleName) {
         String packagePath = "main" + File.separator + "java" + File.separator;
         if (StrUtil.isNotBlank(packageName)) {
-            packagePath += packageName.replace(".", File.separator) + File.separator + "modules" + File.separator + moduleName + File.separator;
+            packagePath += packageName.replace("." , File.separator) + File.separator + "modules" + File.separator + moduleName + File.separator;
         }
 
-        if (template.contains("Entity.java.vm")) {
+        if (template.contains("Entity.java.vm" )) {
             return packagePath + "entity" + File.separator + className + "Entity.java";
         }
 
-        if (template.contains("Excel.java.vm")) {
+        if (template.contains("Excel.java.vm" )) {
             return packagePath + "excel" + File.separator + className + "Excel.java";
         }
 
-        if (template.contains("Dao.java.vm")) {
+        if (template.contains("Dao.java.vm" )) {
             return packagePath + "dao" + File.separator + className + "Dao.java";
         }
 
-        if (template.contains("Service.java.vm")) {
+        if (template.contains("Service.java.vm" )) {
             return packagePath + "service" + File.separator + className + "Service.java";
         }
 
-        if (template.contains("ServiceImpl.java.vm")) {
+        if (template.contains("ServiceImpl.java.vm" )) {
             return packagePath + "service" + File.separator + "impl" + File.separator + className + "ServiceImpl.java";
         }
 
-        if (template.contains("Controller.java.vm")) {
+        if (template.contains("Controller.java.vm" )) {
             return packagePath + "controller" + File.separator + className + "Controller.java";
         }
 
-        if (template.contains("Dao.xml.vm")) {
+        if (template.contains("Dao.xml.vm" )) {
             return "main" + File.separator + "resources" + File.separator + "mapper" + File.separator + moduleName + File.separator + className + "Dao.xml";
         }
 
-        if (template.contains("DTO.java.vm")) {
+        if (template.contains("DTO.java.vm" )) {
             return packagePath + "dto" + File.separator + className + "DTO.java";
         }
 
-        if (template.contains("index.vue.vm")) {
-            return "vue" + File.separator + "views" + File.separator + "modules" +
-                    File.separator + moduleName + File.separator + className.toLowerCase() + ".vue";
+        if (template.contains("index.vue.vm" )) {
+            return "vue" + File.separator + "views" + File.separator + moduleName + File.separator + className.toLowerCase() + ".vue";
         }
 
-        if (template.contains("add-or-update.vue.vm")) {
-            return "vue" + File.separator + "views" + File.separator + "modules" +
-                    File.separator + moduleName + File.separator + className.toLowerCase() + "-add-or-update.vue";
+        if (template.contains("add-or-update.vue.vm" )) {
+            return "vue" + File.separator + "views" + File.separator + moduleName + File.separator + className.toLowerCase() + "-add-or-update.vue";
         }
 
-        if (template.contains("mysql.vm")) {
+        if (template.contains("mysql.vm" )) {
             return className.toLowerCase() + ".mysql.sql";
         }
 
-        if (template.contains("oracle.vm")) {
+        if (template.contains("oracle.vm" )) {
             return className.toLowerCase() + ".oracle.sql";
         }
 
-        if (template.contains("sqlserver.vm")) {
+        if (template.contains("sqlserver.vm" )) {
             return className.toLowerCase() + ".sqlserver.sql";
         }
 
-        if (template.contains("postgresql.vm")) {
+        if (template.contains("postgresql.vm" )) {
             return className.toLowerCase() + ".postgresql.sql";
         }
 
