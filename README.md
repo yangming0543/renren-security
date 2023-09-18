@@ -3,7 +3,6 @@
 - 采用SpringBoot、Shiro、MyBatis-Plus、Vue3、TypeScript、Element Plus、Vue Router、Pinia、Axios、Vite框架，开发的一套权限系统，极低门槛，拿来即用。设计之初，就非常注重安全性，为企业系统保驾护航，让一切都变得如此简单。
 - 提供了代码生成器，只需编写30%左右代码，其余的代码交给系统自动生成，可快速完成开发任务
 - 支持MySQL、达梦、Oracle、SQL Server、PostgreSQL等主流数据库
-- 前端地址：https://gitee.com/renrenio/renren-ui
 - 演示地址：http://demo.open.renren.io/renren-security （账号密码：admin/admin）
 
 <br>
@@ -68,7 +67,8 @@ renren-security
 │           ├─template 代码生成器模板（可增加或修改相应模板）
 │           ├─application.yml    全局配置文件
 │           └─generator.properties   代码生成器，配置文件
-│
+│ 
+├─renren-ui        Vue3前端工程
 ```
 
 <br>
