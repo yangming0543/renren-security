@@ -68,6 +68,7 @@ const dataForm = reactive({
   email: "",
   mobile: "",
   roleIdList: [] as IObject[],
+  highRoleIdList: [] as IObject[],
   status: 1
 });
 
@@ -136,6 +137,8 @@ const getRoleList = () => {
 const getInfo = (id: number) => {
   baseService.get(`/sys/user/${id}`).then((res) => {
     Object.assign(dataForm, res.data);
+    dataForm.highRoleIdList = dataForm.roleIdList.filter(id => !roleList.value.some(role => role.id === id));
+    dataForm.roleIdList = dataForm.roleIdList.filter(id => !dataForm.highRoleIdList.includes(id))
   });
 };
 
@@ -147,7 +150,7 @@ const dataFormSubmitHandle = () => {
     }
     (!dataForm.id ? baseService.post : baseService.put)("/sys/user", {
       ...dataForm,
-      roleIdList: [...dataForm.roleIdList]
+      roleIdList: [...dataForm.roleIdList,...dataForm.highRoleIdList]
     }).then((res) => {
       ElMessage.success({
         message: "成功",
