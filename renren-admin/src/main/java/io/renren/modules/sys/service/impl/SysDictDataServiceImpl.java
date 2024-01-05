@@ -43,7 +43,7 @@ public class SysDictDataServiceImpl extends BaseServiceImpl<SysDictDataDao, SysD
     }
 
     private QueryWrapper<SysDictDataEntity> getWrapper(Map<String, Object> params){
-        String dictTypeId = (String) params.get("dictTypeId");
+        Long dictTypeId = Long.parseLong((String) params.get("dictTypeId"));
         String dictLabel = (String) params.get("dictLabel");
         String dictValue = (String) params.get("dictValue");
 
