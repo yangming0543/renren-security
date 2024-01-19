@@ -38,6 +38,8 @@ export const mergeServerRoute = (
       matched: [...matched, { path, title: x.name }],
       ...meta
     };
+    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+    // @ts-ignore
     r.redirect =
       x.redirect ||
       (isNotMatchComponent ? { path: "/error", query: { to: 404 }, replace: true } : "");
@@ -50,6 +52,8 @@ export const mergeServerRoute = (
         sysRouteMap,
         getValueByKeys(r.meta, "matched", [])
       );
+      // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+      // @ts-ignore
       r.children = childrenRoutes[0];
       routeToMeta = { ...routeToMeta, ...childrenRoutes[1] };
     }
