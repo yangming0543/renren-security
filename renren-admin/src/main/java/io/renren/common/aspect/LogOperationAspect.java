@@ -17,6 +17,7 @@ import io.renren.modules.log.enums.OperationStatusEnum;
 import io.renren.modules.log.service.SysLogOperationService;
 import io.renren.modules.security.user.SecurityUser;
 import io.renren.modules.security.user.UserDetail;
+import jakarta.servlet.http.HttpServletRequest;
 import lombok.AllArgsConstructor;
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.Around;
@@ -26,7 +27,6 @@ import org.aspectj.lang.reflect.MethodSignature;
 import org.springframework.http.HttpHeaders;
 import org.springframework.stereotype.Component;
 
-import javax.servlet.http.HttpServletRequest;
 import java.lang.reflect.Method;
 
 /**

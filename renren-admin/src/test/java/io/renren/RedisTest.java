@@ -11,12 +11,12 @@ package io.renren;
 import cn.hutool.core.util.StrUtil;
 import io.renren.common.redis.RedisUtils;
 import io.renren.modules.sys.entity.SysUserEntity;
+import jakarta.annotation.Resource;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
-import javax.annotation.Resource;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest

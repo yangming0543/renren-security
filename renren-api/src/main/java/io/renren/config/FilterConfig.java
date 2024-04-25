@@ -9,11 +9,11 @@
 package io.renren.config;
 
 import io.renren.common.xss.XssFilter;
+import jakarta.servlet.DispatcherType;
 import org.springframework.boot.web.servlet.FilterRegistrationBean;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
-import javax.servlet.DispatcherType;
 
 /**
  * Filter配置

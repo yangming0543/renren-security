@@ -8,8 +8,7 @@
 
 package io.renren.modules.log.dto;
 
-import io.swagger.annotations.ApiModel;
-import io.swagger.annotations.ApiModelProperty;
+import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;
 
 import java.io.Serializable;
@@ -22,25 +21,25 @@ import java.util.Date;
  * @since 1.0.0
  */
 @Data
-@ApiModel(value = "异常日志")
+@Schema(title = "异常日志")
 public class SysLogErrorDTO implements Serializable {
     private static final long serialVersionUID = 1L;
 
-	@ApiModelProperty(value = "id")
+	@Schema(title = "id")
 	private Long id;
-	@ApiModelProperty(value = "请求URI")
+	@Schema(title = "请求URI")
 	private String requestUri;
-	@ApiModelProperty(value = "请求方式")
+	@Schema(title = "请求方式")
 	private String requestMethod;
-	@ApiModelProperty(value = "请求参数")
+	@Schema(title = "请求参数")
 	private String requestParams;
-	@ApiModelProperty(value = "用户代理")
+	@Schema(title = "用户代理")
 	private String userAgent;
-	@ApiModelProperty(value = "操作IP")
+	@Schema(title = "操作IP")
 	private String ip;
-	@ApiModelProperty(value = "异常信息")
+	@Schema(title = "异常信息")
 	private String errorInfo;
-	@ApiModelProperty(value = "创建时间")
+	@Schema(title = "创建时间")
 	private Date createDate;
 
 }

@@ -10,12 +10,12 @@ package io.renren.config;
 
 import io.renren.dao.*;
 import io.renren.utils.RenException;
+import jakarta.annotation.Resource;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Primary;
 
-import javax.annotation.Resource;
 
 /**
  * 数据库配置

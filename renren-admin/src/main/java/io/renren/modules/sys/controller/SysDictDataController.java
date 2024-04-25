@@ -18,14 +18,14 @@ import io.renren.common.validator.group.DefaultGroup;
 import io.renren.common.validator.group.UpdateGroup;
 import io.renren.modules.sys.dto.SysDictDataDTO;
 import io.renren.modules.sys.service.SysDictDataService;
-import io.swagger.annotations.Api;
-import io.swagger.annotations.ApiImplicitParam;
-import io.swagger.annotations.ApiImplicitParams;
-import io.swagger.annotations.ApiOperation;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.Parameter;
+import io.swagger.v3.oas.annotations.Parameters;
+import io.swagger.v3.oas.annotations.enums.ParameterIn;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.AllArgsConstructor;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.web.bind.annotation.*;
-import springfox.documentation.annotations.ApiIgnore;
 
 import java.util.Map;
 
@@ -36,23 +36,23 @@ import java.util.Map;
  */
 @RestController
 @RequestMapping("sys/dict/data")
-@Api(tags = "字典数据")
+@Tag(name = "字典数据")
 @AllArgsConstructor
 public class SysDictDataController {
     private final SysDictDataService sysDictDataService;
 
     @GetMapping("page")
-    @ApiOperation("字典数据")
-    @ApiImplicitParams({
-            @ApiImplicitParam(name = Constant.PAGE, value = "当前页码，从1开始", paramType = "query", required = true, dataType = "int"),
-            @ApiImplicitParam(name = Constant.LIMIT, value = "每页显示记录数", paramType = "query", required = true, dataType = "int"),
-            @ApiImplicitParam(name = Constant.ORDER_FIELD, value = "排序字段", paramType = "query", dataType = "String"),
-            @ApiImplicitParam(name = Constant.ORDER, value = "排序方式，可选值(asc、desc)", paramType = "query", dataType = "String"),
-            @ApiImplicitParam(name = "dictLabel", value = "字典标签", paramType = "query", dataType = "String"),
-            @ApiImplicitParam(name = "dictValue", value = "字典值", paramType = "query", dataType = "String")
+    @Operation(summary = "字典数据")
+    @Parameters({
+            @Parameter(name = Constant.PAGE, description = "当前页码，从1开始", in = ParameterIn.QUERY, required = true, ref = "int"),
+            @Parameter(name = Constant.LIMIT, description = "每页显示记录数", in = ParameterIn.QUERY, required = true, ref = "int"),
+            @Parameter(name = Constant.ORDER_FIELD, description = "排序字段", in = ParameterIn.QUERY, ref = "String"),
+            @Parameter(name = Constant.ORDER, description = "排序方式，可选值(asc、desc)", in = ParameterIn.QUERY, ref = "String"),
+            @Parameter(name = "dictLabel", description = "字典标签", in = ParameterIn.QUERY, ref = "String"),
+            @Parameter(name = "dictValue", description = "字典值", in = ParameterIn.QUERY, ref = "String")
     })
     @RequiresPermissions("sys:dict:page")
-    public Result<PageData<SysDictDataDTO>> page(@ApiIgnore @RequestParam Map<String, Object> params) {
+    public Result<PageData<SysDictDataDTO>> page(@Parameter(hidden = true) @RequestParam Map<String, Object> params) {
         //字典类型
         PageData<SysDictDataDTO> page = sysDictDataService.page(params);
 
@@ -60,7 +60,7 @@ public class SysDictDataController {
     }
 
     @GetMapping("{id}")
-    @ApiOperation("信息")
+    @Operation(summary = "信息")
     @RequiresPermissions("sys:dict:info")
     public Result<SysDictDataDTO> get(@PathVariable("id") Long id) {
         SysDictDataDTO data = sysDictDataService.get(id);
@@ -69,7 +69,7 @@ public class SysDictDataController {
     }
 
     @PostMapping
-    @ApiOperation("保存")
+    @Operation(summary = "保存")
     @LogOperation("保存")
     @RequiresPermissions("sys:dict:save")
     public Result save(@RequestBody SysDictDataDTO dto) {
@@ -82,7 +82,7 @@ public class SysDictDataController {
     }
 
     @PutMapping
-    @ApiOperation("修改")
+    @Operation(summary = "修改")
     @LogOperation("修改")
     @RequiresPermissions("sys:dict:update")
     public Result update(@RequestBody SysDictDataDTO dto) {
@@ -95,7 +95,7 @@ public class SysDictDataController {
     }
 
     @DeleteMapping
-    @ApiOperation("删除")
+    @Operation(summary = "删除")
     @LogOperation("删除")
     @RequiresPermissions("sys:dict:delete")
     public Result delete(@RequestBody Long[] ids) {

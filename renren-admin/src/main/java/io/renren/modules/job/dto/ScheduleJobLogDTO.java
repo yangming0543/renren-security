@@ -8,8 +8,7 @@
 
 package io.renren.modules.job.dto;
 
-import io.swagger.annotations.ApiModel;
-import io.swagger.annotations.ApiModelProperty;
+import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;
 
 import java.io.Serializable;
@@ -22,32 +21,32 @@ import java.util.Date;
  * @since 1.0.0
  */
 @Data
-@ApiModel(value = "定时任务日志")
+@Schema(title = "定时任务日志")
 public class ScheduleJobLogDTO implements Serializable {
     private static final long serialVersionUID = 1L;
 
-    @ApiModelProperty(value = "id")
+    @Schema(title = "id")
     private Long id;
 
-    @ApiModelProperty(value = "任务id")
+    @Schema(title = "任务id")
     private Long jobId;
 
-    @ApiModelProperty(value = "spring bean名称")
-    private String beanName;
+    @Schema(title = "spring bean名称")
+    private String beantitle;
 
-    @ApiModelProperty(value = "参数")
+    @Schema(title = "参数")
     private String params;
 
-    @ApiModelProperty(value = "任务状态    0：失败    1：成功")
+    @Schema(title = "任务状态    0：失败    1：成功")
     private Integer status;
 
-    @ApiModelProperty(value = "失败信息")
+    @Schema(title = "失败信息")
     private String error;
 
-    @ApiModelProperty(value = "耗时(单位：毫秒)")
+    @Schema(title = "耗时(单位：毫秒)")
     private Integer times;
 
-    @ApiModelProperty(value = "创建时间")
+    @Schema(title = "创建时间")
     private Date createDate;
 
 }

@@ -17,8 +17,8 @@ import io.renren.common.validator.group.DefaultGroup;
 import io.renren.common.validator.group.UpdateGroup;
 import io.renren.modules.sys.dto.SysDeptDTO;
 import io.renren.modules.sys.service.SysDeptService;
-import io.swagger.annotations.Api;
-import io.swagger.annotations.ApiOperation;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.AllArgsConstructor;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.web.bind.annotation.*;
@@ -33,13 +33,13 @@ import java.util.List;
  */
 @RestController
 @RequestMapping("/sys/dept")
-@Api(tags = "部门管理")
+@Tag(name = "部门管理")
 @AllArgsConstructor
 public class SysDeptController {
     private final SysDeptService sysDeptService;
 
     @GetMapping("list")
-    @ApiOperation("列表")
+    @Operation(summary = "列表")
     @RequiresPermissions("sys:dept:list")
     public Result<List<SysDeptDTO>> list() {
         List<SysDeptDTO> list = sysDeptService.list(new HashMap<>(1));
@@ -48,7 +48,7 @@ public class SysDeptController {
     }
 
     @GetMapping("{id}")
-    @ApiOperation("信息")
+    @Operation(summary = "信息")
     @RequiresPermissions("sys:dept:info")
     public Result<SysDeptDTO> get(@PathVariable("id") Long id) {
         SysDeptDTO data = sysDeptService.get(id);
@@ -57,7 +57,7 @@ public class SysDeptController {
     }
 
     @PostMapping
-    @ApiOperation("保存")
+    @Operation(summary = "保存")
     @LogOperation("保存")
     @RequiresPermissions("sys:dept:save")
     public Result save(@RequestBody SysDeptDTO dto) {
@@ -70,7 +70,7 @@ public class SysDeptController {
     }
 
     @PutMapping
-    @ApiOperation("修改")
+    @Operation(summary = "修改")
     @LogOperation("修改")
     @RequiresPermissions("sys:dept:update")
     public Result update(@RequestBody SysDeptDTO dto) {
@@ -83,7 +83,7 @@ public class SysDeptController {
     }
 
     @DeleteMapping("{id}")
-    @ApiOperation("删除")
+    @Operation(summary = "删除")
     @LogOperation("删除")
     @RequiresPermissions("sys:dept:delete")
     public Result delete(@PathVariable("id") Long id) {

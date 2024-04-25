@@ -14,8 +14,8 @@ import io.renren.common.validator.ValidatorUtils;
 import io.renren.dto.RegisterDTO;
 import io.renren.entity.UserEntity;
 import io.renren.service.UserService;
-import io.swagger.annotations.Api;
-import io.swagger.annotations.ApiOperation;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.AllArgsConstructor;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -31,13 +31,13 @@ import java.util.Date;
  */
 @RestController
 @RequestMapping("/api")
-@Api(tags = "注册接口")
+@Tag(name = "注册接口")
 @AllArgsConstructor
 public class ApiRegisterController {
     private final UserService userService;
 
     @PostMapping("register")
-    @ApiOperation("注册")
+    @Operation(summary = "注册")
     public Result register(@RequestBody RegisterDTO dto) {
         //表单校验
         ValidatorUtils.validateEntity(dto);

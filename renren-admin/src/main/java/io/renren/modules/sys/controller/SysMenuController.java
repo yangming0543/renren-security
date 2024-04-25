@@ -20,9 +20,10 @@ import io.renren.modules.security.user.UserDetail;
 import io.renren.modules.sys.dto.SysMenuDTO;
 import io.renren.modules.sys.enums.MenuTypeEnum;
 import io.renren.modules.sys.service.SysMenuService;
-import io.swagger.annotations.Api;
-import io.swagger.annotations.ApiImplicitParam;
-import io.swagger.annotations.ApiOperation;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.Parameter;
+import io.swagger.v3.oas.annotations.enums.ParameterIn;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.AllArgsConstructor;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.web.bind.annotation.*;
@@ -37,14 +38,14 @@ import java.util.Set;
  */
 @RestController
 @RequestMapping("/sys/menu")
-@Api(tags = "菜单管理")
+@Tag(name = "菜单管理")
 @AllArgsConstructor
 public class SysMenuController {
     private final SysMenuService sysMenuService;
     private final ShiroService shiroService;
 
     @GetMapping("nav")
-    @ApiOperation("导航")
+    @Operation(summary = "导航")
     public Result<List<SysMenuDTO>> nav() {
         UserDetail user = SecurityUser.getUser();
         List<SysMenuDTO> list = sysMenuService.getUserMenuList(user, MenuTypeEnum.MENU.value());
@@ -53,7 +54,7 @@ public class SysMenuController {
     }
 
     @GetMapping("permissions")
-    @ApiOperation("权限标识")
+    @Operation(summary = "权限标识")
     public Result<Set<String>> permissions() {
         UserDetail user = SecurityUser.getUser();
         Set<String> set = shiroService.getUserPermissions(user);
@@ -62,8 +63,8 @@ public class SysMenuController {
     }
 
     @GetMapping("list")
-    @ApiOperation("列表")
-    @ApiImplicitParam(name = "type", value = "菜单类型 0：菜单 1：按钮  null：全部", paramType = "query", dataType = "int")
+    @Operation(summary = "列表")
+    @Parameter(name = "type", description = "菜单类型 0：菜单 1：按钮  null：全部", in = ParameterIn.QUERY, ref = "int")
     @RequiresPermissions("sys:menu:list")
     public Result<List<SysMenuDTO>> list(Integer type) {
         List<SysMenuDTO> list = sysMenuService.getAllMenuList(type);
@@ -72,7 +73,7 @@ public class SysMenuController {
     }
 
     @GetMapping("{id}")
-    @ApiOperation("信息")
+    @Operation(summary = "信息")
     @RequiresPermissions("sys:menu:info")
     public Result<SysMenuDTO> get(@PathVariable("id") Long id) {
         SysMenuDTO data = sysMenuService.get(id);
@@ -81,7 +82,7 @@ public class SysMenuController {
     }
 
     @PostMapping
-    @ApiOperation("保存")
+    @Operation(summary = "保存")
     @LogOperation("保存")
     @RequiresPermissions("sys:menu:save")
     public Result save(@RequestBody SysMenuDTO dto) {
@@ -94,7 +95,7 @@ public class SysMenuController {
     }
 
     @PutMapping
-    @ApiOperation("修改")
+    @Operation(summary = "修改")
     @LogOperation("修改")
     @RequiresPermissions("sys:menu:update")
     public Result update(@RequestBody SysMenuDTO dto) {
@@ -107,7 +108,7 @@ public class SysMenuController {
     }
 
     @DeleteMapping("{id}")
-    @ApiOperation("删除")
+    @Operation(summary = "删除")
     @LogOperation("删除")
     @RequiresPermissions("sys:menu:delete")
     public Result delete(@PathVariable("id") Long id) {
@@ -126,7 +127,7 @@ public class SysMenuController {
     }
 
     @GetMapping("select")
-    @ApiOperation("角色菜单权限")
+    @Operation(summary = "角色菜单权限")
     @RequiresPermissions("sys:menu:select")
     public Result<List<SysMenuDTO>> select() {
         UserDetail user = SecurityUser.getUser();

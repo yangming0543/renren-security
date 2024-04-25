@@ -8,7 +8,8 @@
 
 package io.renren.modules.security.service;
 
-import javax.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpServletResponse;
+
 import java.io.IOException;
 
 /**

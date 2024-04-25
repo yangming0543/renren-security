@@ -19,14 +19,14 @@ import io.renren.common.validator.group.UpdateGroup;
 import io.renren.modules.sys.dto.SysDictTypeDTO;
 import io.renren.modules.sys.entity.DictType;
 import io.renren.modules.sys.service.SysDictTypeService;
-import io.swagger.annotations.Api;
-import io.swagger.annotations.ApiImplicitParam;
-import io.swagger.annotations.ApiImplicitParams;
-import io.swagger.annotations.ApiOperation;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.Parameter;
+import io.swagger.v3.oas.annotations.Parameters;
+import io.swagger.v3.oas.annotations.enums.ParameterIn;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.AllArgsConstructor;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.web.bind.annotation.*;
-import springfox.documentation.annotations.ApiIgnore;
 
 import java.util.List;
 import java.util.Map;
@@ -38,23 +38,23 @@ import java.util.Map;
  */
 @RestController
 @RequestMapping("sys/dict/type")
-@Api(tags = "字典类型")
+@Tag(name = "字典类型")
 @AllArgsConstructor
 public class SysDictTypeController {
     private final SysDictTypeService sysDictTypeService;
 
     @GetMapping("page")
-    @ApiOperation("字典类型")
-    @ApiImplicitParams({
-            @ApiImplicitParam(name = Constant.PAGE, value = "当前页码，从1开始", paramType = "query", required = true, dataType = "int"),
-            @ApiImplicitParam(name = Constant.LIMIT, value = "每页显示记录数", paramType = "query", required = true, dataType = "int"),
-            @ApiImplicitParam(name = Constant.ORDER_FIELD, value = "排序字段", paramType = "query", dataType = "String"),
-            @ApiImplicitParam(name = Constant.ORDER, value = "排序方式，可选值(asc、desc)", paramType = "query", dataType = "String"),
-            @ApiImplicitParam(name = "dictType", value = "字典类型", paramType = "query", dataType = "String"),
-            @ApiImplicitParam(name = "dictName", value = "字典名称", paramType = "query", dataType = "String")
+    @Operation(summary = "字典类型")
+    @Parameters({
+            @Parameter(name = Constant.PAGE, description = "当前页码，从1开始", in = ParameterIn.QUERY, required = true, ref = "int"),
+            @Parameter(name = Constant.LIMIT, description = "每页显示记录数", in = ParameterIn.QUERY, required = true, ref = "int"),
+            @Parameter(name = Constant.ORDER_FIELD, description = "排序字段", in = ParameterIn.QUERY, ref = "String"),
+            @Parameter(name = Constant.ORDER, description = "排序方式，可选值(asc、desc)", in = ParameterIn.QUERY, ref = "String"),
+            @Parameter(name = "dictType", description = "字典类型", in = ParameterIn.QUERY, ref = "String"),
+            @Parameter(name = "dictName", description = "字典名称", in = ParameterIn.QUERY, ref = "String")
     })
     @RequiresPermissions("sys:dict:page")
-    public Result<PageData<SysDictTypeDTO>> page(@ApiIgnore @RequestParam Map<String, Object> params) {
+    public Result<PageData<SysDictTypeDTO>> page(@Parameter(hidden = true) @RequestParam Map<String, Object> params) {
         //字典类型
         PageData<SysDictTypeDTO> page = sysDictTypeService.page(params);
 
@@ -62,7 +62,7 @@ public class SysDictTypeController {
     }
 
     @GetMapping("{id}")
-    @ApiOperation("信息")
+    @Operation(summary = "信息")
     @RequiresPermissions("sys:dict:info")
     public Result<SysDictTypeDTO> get(@PathVariable("id") Long id) {
         SysDictTypeDTO data = sysDictTypeService.get(id);
@@ -71,7 +71,7 @@ public class SysDictTypeController {
     }
 
     @PostMapping
-    @ApiOperation("保存")
+    @Operation(summary = "保存")
     @LogOperation("保存")
     @RequiresPermissions("sys:dict:save")
     public Result save(@RequestBody SysDictTypeDTO dto) {
@@ -84,7 +84,7 @@ public class SysDictTypeController {
     }
 
     @PutMapping
-    @ApiOperation("修改")
+    @Operation(summary = "修改")
     @LogOperation("修改")
     @RequiresPermissions("sys:dict:update")
     public Result update(@RequestBody SysDictTypeDTO dto) {
@@ -97,7 +97,7 @@ public class SysDictTypeController {
     }
 
     @DeleteMapping
-    @ApiOperation("删除")
+    @Operation(summary = "删除")
     @LogOperation("删除")
     @RequiresPermissions("sys:dict:delete")
     public Result delete(@RequestBody Long[] ids) {
@@ -110,7 +110,7 @@ public class SysDictTypeController {
     }
 
     @GetMapping("all")
-    @ApiOperation("所有字典数据")
+    @Operation(summary = "所有字典数据")
     public Result<List<DictType>> all() {
         List<DictType> list = sysDictTypeService.getAllList();
 

@@ -11,12 +11,12 @@ package io.renren.commons.dynamic.datasource.config;
 import com.alibaba.druid.pool.DruidDataSource;
 import io.renren.commons.dynamic.datasource.properties.DataSourceProperties;
 import io.renren.commons.dynamic.datasource.properties.DynamicDataSourceProperties;
+import jakarta.annotation.Resource;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
-import javax.annotation.Resource;
 import java.util.HashMap;
 import java.util.Map;
 

@@ -8,7 +8,7 @@
 
 package io.renren.modules.sys.dto;
 
-import io.swagger.annotations.ApiModel;
+import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;
 
 import java.io.Serializable;
@@ -21,12 +21,12 @@ import java.math.BigDecimal;
  * @since 1.0.0
  */
 @Data
-@ApiModel(value = "系统数据")
+@Schema(title = "系统数据")
 public class SystemDTO implements Serializable {
     private static final long serialVersionUID = 1L;
 
     private Long sysTime;
-    private String osName;
+    private String ostitle;
     private String osArch;
     private String osVersion;
     private String userLanguage;
@@ -35,13 +35,13 @@ public class SystemDTO implements Serializable {
     private Long freePhysical;
     private BigDecimal memoryRate;
     private Integer processors;
-    private String jvmName;
+    private String jvmtitle;
     private String javaVersion;
     private String javaHome;
     private Long javaTotalMemory;
     private Long javaFreeMemory;
     private Long javaMaxMemory;
-    private String userName;
+    private String usertitle;
     private BigDecimal systemCpuLoad;
     private String userTimezone;
 

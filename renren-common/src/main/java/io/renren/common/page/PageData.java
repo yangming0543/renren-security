@@ -8,8 +8,7 @@
 
 package io.renren.common.page;
 
-import io.swagger.annotations.ApiModel;
-import io.swagger.annotations.ApiModelProperty;
+import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;
 
 import java.io.Serializable;
@@ -21,14 +20,14 @@ import java.util.List;
  * @author Mark sunlightcs@gmail.com
  */
 @Data
-@ApiModel(value = "分页数据")
+@Schema(title = "分页数据")
 public class PageData<T> implements Serializable {
     private static final long serialVersionUID = 1L;
 
-    @ApiModelProperty(value = "总记录数")
+    @Schema(title = "总记录数")
     private int total;
 
-    @ApiModelProperty(value = "列表数据")
+    @Schema(title = "列表数据")
     private List<T> list;
 
     /**

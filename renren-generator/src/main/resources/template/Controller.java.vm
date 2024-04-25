@@ -13,16 +13,12 @@ import ${package}.common.validator.group.UpdateGroup;
 import ${package}.modules.${moduleName}.dto.${className}DTO;
 import ${package}.modules.${moduleName}.excel.${className}Excel;
 import ${package}.modules.${moduleName}.service.${className}Service;
-import io.swagger.annotations.Api;
-import io.swagger.annotations.ApiImplicitParam;
-import io.swagger.annotations.ApiImplicitParams;
-import io.swagger.annotations.ApiOperation;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
-import springfox.documentation.annotations.ApiIgnore;
-
-import javax.servlet.http.HttpServletResponse;
+import io.swagger.v3.oas.annotations.Parameter;
+import io.swagger.v3.oas.annotations.Parameters;
+import jakarta.servlet.http.HttpServletResponse;
 import java.util.List;
 import java.util.Map;
 
@@ -35,28 +31,28 @@ import java.util.Map;
  */
 @RestController
 @RequestMapping("${moduleName}/${pathName}")
-@Api(tags="${comments}")
+@Tag(name="${comments}")
 public class ${className}Controller {
     @Autowired
     private ${className}Service ${classname}Service;
 
     @GetMapping("page")
-    @ApiOperation("分页")
-    @ApiImplicitParams({
-        @ApiImplicitParam(name = Constant.PAGE, value = "当前页码，从1开始", paramType = "query", required = true, dataType="int") ,
-        @ApiImplicitParam(name = Constant.LIMIT, value = "每页显示记录数", paramType = "query",required = true, dataType="int") ,
-        @ApiImplicitParam(name = Constant.ORDER_FIELD, value = "排序字段", paramType = "query", dataType="String") ,
-        @ApiImplicitParam(name = Constant.ORDER, value = "排序方式，可选值(asc、desc)", paramType = "query", dataType="String")
+    @Operation(summary = "分页")
+    @Parameters({
+        @Parameter(name = Constant.PAGE, description = "当前页码，从1开始", in = ParameterIn.QUERY, required = true, ref="int") ,
+        @Parameter(name = Constant.LIMIT, description = "每页显示记录数", in = ParameterIn.QUERY,required = true, ref="int") ,
+        @Parameter(name = Constant.ORDER_FIELD, description = "排序字段", in = ParameterIn.QUERY, ref="String") ,
+        @Parameter(name = Constant.ORDER, description = "排序方式，可选值(asc、desc)", in = ParameterIn.QUERY, ref="String")
     })
     @RequiresPermissions("${moduleName}:${pathName}:page")
-    public Result<PageData<${className}DTO>> page(@ApiIgnore @RequestParam Map<String, Object> params){
+    public Result<PageData<${className}DTO>> page(@Parameter(hidden = true) @RequestParam Map<String, Object> params){
         PageData<${className}DTO> page = ${classname}Service.page(params);
 
         return new Result<PageData<${className}DTO>>().ok(page);
     }
 
     @GetMapping("{id}")
-    @ApiOperation("信息")
+    @Operation(summary = "信息")
     @RequiresPermissions("${moduleName}:${pathName}:info")
     public Result<${className}DTO> get(@PathVariable("id") Long id){
         ${className}DTO data = ${classname}Service.get(id);
@@ -65,7 +61,7 @@ public class ${className}Controller {
     }
 
     @PostMapping
-    @ApiOperation("保存")
+    @Operation(summary = "保存")
     @LogOperation("保存")
     @RequiresPermissions("${moduleName}:${pathName}:save")
     public Result save(@RequestBody ${className}DTO dto){
@@ -78,7 +74,7 @@ public class ${className}Controller {
     }
 
     @PutMapping
-    @ApiOperation("修改")
+    @Operation(summary = "修改")
     @LogOperation("修改")
     @RequiresPermissions("${moduleName}:${pathName}:update")
     public Result update(@RequestBody ${className}DTO dto){
@@ -91,7 +87,7 @@ public class ${className}Controller {
     }
 
     @DeleteMapping
-    @ApiOperation("删除")
+    @Operation(summary = "删除")
     @LogOperation("删除")
     @RequiresPermissions("${moduleName}:${pathName}:delete")
     public Result delete(@RequestBody Long[] ids){
@@ -104,10 +100,10 @@ public class ${className}Controller {
     }
 
     @GetMapping("export")
-    @ApiOperation("导出")
+    @Operation(summary = "导出")
     @LogOperation("导出")
     @RequiresPermissions("${moduleName}:${pathName}:export")
-    public void export(@ApiIgnore @RequestParam Map<String, Object> params, HttpServletResponse response) throws Exception {
+    public void export(@Parameter(hidden = true) @RequestParam Map<String, Object> params, HttpServletResponse response) throws Exception {
         List<${className}DTO> list = ${classname}Service.list(params);
 
         ExcelUtils.exportExcelToTarget(response, null, "${comments}", list, ${className}Excel.class);

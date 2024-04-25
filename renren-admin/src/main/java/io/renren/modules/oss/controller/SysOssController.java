@@ -24,13 +24,13 @@ import io.renren.modules.oss.cloud.OSSFactory;
 import io.renren.modules.oss.entity.SysOssEntity;
 import io.renren.modules.oss.service.SysOssService;
 import io.renren.modules.sys.service.SysParamsService;
-import io.swagger.annotations.Api;
-import io.swagger.annotations.ApiOperation;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.Parameter;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.AllArgsConstructor;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
-import springfox.documentation.annotations.ApiIgnore;
 
 import java.util.Arrays;
 import java.util.Date;
@@ -44,7 +44,7 @@ import java.util.Map;
  */
 @RestController
 @RequestMapping("sys/oss")
-@Api(tags = "文件上传")
+@Tag(name = "文件上传")
 @AllArgsConstructor
 public class SysOssController {
     private final SysOssService sysOssService;
@@ -53,16 +53,16 @@ public class SysOssController {
     private final static String KEY = Constant.CLOUD_STORAGE_CONFIG_KEY;
 
     @GetMapping("page")
-    @ApiOperation(value = "分页")
+    @Operation(summary = "分页")
     @RequiresPermissions("sys:oss:all")
-    public Result<PageData<SysOssEntity>> page(@ApiIgnore @RequestParam Map<String, Object> params) {
+    public Result<PageData<SysOssEntity>> page(@Parameter(hidden = true) @RequestParam Map<String, Object> params) {
         PageData<SysOssEntity> page = sysOssService.page(params);
 
         return new Result<PageData<SysOssEntity>>().ok(page);
     }
 
     @GetMapping("info")
-    @ApiOperation(value = "云存储配置信息")
+    @Operation(summary = "云存储配置信息")
     @RequiresPermissions("sys:oss:all")
     public Result<CloudStorageConfig> info() {
         CloudStorageConfig config = sysParamsService.getValueObject(KEY, CloudStorageConfig.class);
@@ -71,7 +71,7 @@ public class SysOssController {
     }
 
     @PostMapping
-    @ApiOperation(value = "保存云存储配置信息")
+    @Operation(summary = "保存云存储配置信息")
     @LogOperation("保存云存储配置信息")
     @RequiresPermissions("sys:oss:all")
     public Result saveConfig(@RequestBody CloudStorageConfig config) {
@@ -95,7 +95,7 @@ public class SysOssController {
     }
 
     @PostMapping("upload")
-    @ApiOperation(value = "上传文件")
+    @Operation(summary = "上传文件")
     @RequiresPermissions("sys:oss:all")
     public Result<Map<String, Object>> upload(@RequestParam("file") MultipartFile file) throws Exception {
         if (file.isEmpty()) {
@@ -119,7 +119,7 @@ public class SysOssController {
     }
 
     @DeleteMapping
-    @ApiOperation(value = "删除")
+    @Operation(summary = "删除")
     @LogOperation("删除")
     @RequiresPermissions("sys:oss:all")
     public Result delete(@RequestBody Long[] ids) {

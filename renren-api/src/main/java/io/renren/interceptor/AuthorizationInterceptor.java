@@ -14,13 +14,12 @@ import io.renren.common.exception.ErrorCode;
 import io.renren.common.exception.RenException;
 import io.renren.entity.TokenEntity;
 import io.renren.service.TokenService;
+import jakarta.annotation.Resource;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
 import org.springframework.stereotype.Component;
 import org.springframework.web.method.HandlerMethod;
-import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
-
-import javax.annotation.Resource;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
+import org.springframework.web.servlet.HandlerInterceptor;
 
 /**
  * 权限(Token)验证
@@ -28,7 +27,7 @@ import javax.servlet.http.HttpServletResponse;
  * @author Mark sunlightcs@gmail.com
  */
 @Component
-public class AuthorizationInterceptor extends HandlerInterceptorAdapter {
+public class AuthorizationInterceptor implements HandlerInterceptor {
     @Resource
     private TokenService tokenService;
 

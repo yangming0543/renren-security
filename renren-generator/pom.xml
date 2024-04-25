@@ -11,14 +11,14 @@
 	<parent>
 		<groupId>org.springframework.boot</groupId>
 		<artifactId>spring-boot-starter-parent</artifactId>
-		<version>2.7.15</version>
+		<version>3.2.5</version>
 	</parent>
 
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
-		<java.version>1.8</java.version>
-		<mybatis.spring.boot.version>2.2.2</mybatis.spring.boot.version>
+		<java.version>17</java.version>
+		<mybatis.spring.boot.version>3.0.3</mybatis.spring.boot.version>
 		<pagehelper.spring.boot.version>1.4.2</pagehelper.spring.boot.version>
 		<druid.version>1.2.14</druid.version>
 		<commons.configuration.version>1.10</commons.configuration.version>

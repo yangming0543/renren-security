@@ -11,10 +11,10 @@ package io.renren.service;
 import io.renren.commons.dynamic.datasource.annotation.DataSource;
 import io.renren.modules.sys.dao.SysUserDao;
 import io.renren.modules.sys.entity.SysUserEntity;
+import jakarta.annotation.Resource;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import javax.annotation.Resource;
 
 /**
  * 测试多数据源

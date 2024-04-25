@@ -15,11 +15,11 @@ import io.renren.common.validator.ValidatorUtils;
 import io.renren.dto.LoginDTO;
 import io.renren.service.TokenService;
 import io.renren.service.UserService;
-import io.swagger.annotations.Api;
-import io.swagger.annotations.ApiOperation;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.Parameter;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.AllArgsConstructor;
 import org.springframework.web.bind.annotation.*;
-import springfox.documentation.annotations.ApiIgnore;
 
 import java.util.Map;
 
@@ -30,7 +30,7 @@ import java.util.Map;
  */
 @RestController
 @RequestMapping("/api")
-@Api(tags = "登录接口")
+@Tag(name = "登录接口")
 @AllArgsConstructor
 public class ApiLoginController {
     private final UserService userService;
@@ -38,7 +38,7 @@ public class ApiLoginController {
 
 
     @PostMapping("login")
-    @ApiOperation("登录")
+    @Operation(summary = "登录")
     public Result<Map<String, Object>> login(@RequestBody LoginDTO dto) {
         //表单校验
         ValidatorUtils.validateEntity(dto);
@@ -51,8 +51,8 @@ public class ApiLoginController {
 
     @Login
     @PostMapping("logout")
-    @ApiOperation("退出")
-    public Result logout(@ApiIgnore @RequestAttribute("userId") Long userId) {
+    @Operation(summary = "退出")
+    public Result logout(@Parameter(hidden = true) @RequestAttribute("userId") Long userId) {
         tokenService.expireToken(userId);
         return new Result();
     }

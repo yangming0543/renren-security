@@ -27,9 +27,12 @@ import io.renren.modules.security.user.UserDetail;
 import io.renren.modules.sys.dto.SysUserDTO;
 import io.renren.modules.sys.enums.UserStatusEnum;
 import io.renren.modules.sys.service.SysUserService;
-import io.swagger.annotations.Api;
-import io.swagger.annotations.ApiImplicitParam;
-import io.swagger.annotations.ApiOperation;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.Parameter;
+import io.swagger.v3.oas.annotations.enums.ParameterIn;
+import io.swagger.v3.oas.annotations.tags.Tag;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpHeaders;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -37,8 +40,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.Date;
 
@@ -48,7 +49,7 @@ import java.util.Date;
  * @author Mark sunlightcs@gmail.com
  */
 @RestController
-@Api(tags = "登录管理")
+@Tag(name = "登录管理")
 @AllArgsConstructor
 public class LoginController {
     private final SysUserService sysUserService;
@@ -57,8 +58,8 @@ public class LoginController {
     private final SysLogLoginService sysLogLoginService;
 
     @GetMapping("captcha")
-    @ApiOperation(value = "验证码", produces = "application/octet-stream")
-    @ApiImplicitParam(paramType = "query", dataType = "string", name = "uuid", required = true)
+    @Operation(summary = "验证码")
+    @Parameter(in = ParameterIn.QUERY, ref = "string", name = "uuid", required = true)
     public void captcha(HttpServletResponse response, String uuid) throws IOException {
         //uuid不能为空
         AssertUtils.isBlank(uuid, ErrorCode.IDENTIFIER_NOT_NULL);
@@ -68,7 +69,7 @@ public class LoginController {
     }
 
     @PostMapping("login")
-    @ApiOperation(value = "登录")
+    @Operation(summary = "登录")
     public Result login(HttpServletRequest request, @RequestBody LoginDTO login) {
         //效验数据
         ValidatorUtils.validateEntity(login);
@@ -127,7 +128,7 @@ public class LoginController {
     }
 
     @PostMapping("logout")
-    @ApiOperation(value = "退出")
+    @Operation(summary = "退出")
     public Result logout(HttpServletRequest request) {
         UserDetail user = SecurityUser.getUser();
 

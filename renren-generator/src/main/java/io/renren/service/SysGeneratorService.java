@@ -14,10 +14,10 @@ import io.renren.dao.GeneratorDao;
 import io.renren.utils.GenUtils;
 import io.renren.utils.PageUtils;
 import io.renren.utils.Query;
+import jakarta.annotation.Resource;
 import org.apache.tomcat.util.http.fileupload.IOUtils;
 import org.springframework.stereotype.Service;
 
-import javax.annotation.Resource;
 import java.io.ByteArrayOutputStream;
 import java.util.List;
 import java.util.Map;

@@ -13,13 +13,12 @@ import io.renren.common.utils.TreeNode;
 import io.renren.common.validator.group.AddGroup;
 import io.renren.common.validator.group.DefaultGroup;
 import io.renren.common.validator.group.UpdateGroup;
-import io.swagger.annotations.ApiModel;
-import io.swagger.annotations.ApiModelProperty;
+import io.swagger.v3.oas.annotations.media.Schema;
+import jakarta.validation.constraints.Min;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Null;
 
-import javax.validation.constraints.Min;
-import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Null;
 import java.io.Serializable;
 import java.util.Date;
 
@@ -29,33 +28,33 @@ import java.util.Date;
  * @author Mark sunlightcs@gmail.com
  * @since 1.0.0
  */
-@ApiModel(value = "部门管理")
+@Schema(title = "部门管理")
 public class SysDeptDTO extends TreeNode implements Serializable {
     private static final long serialVersionUID = 1L;
 
-	@ApiModelProperty(value = "id")
+	@Schema(title = "id")
 	@Null(message="{id.null}", groups = AddGroup.class)
 	@NotNull(message="{id.require}", groups = UpdateGroup.class)
 	private Long id;
 
-	@ApiModelProperty(value = "上级ID")
+	@Schema(title = "上级ID")
 	@NotNull(message="{sysdept.pid.require}", groups = DefaultGroup.class)
 	private Long pid;
 
-	@ApiModelProperty(value = "部门名称")
-	@NotBlank(message="{sysdept.name.require}", groups = DefaultGroup.class)
-	private String name;
+	@Schema(title = "部门名称")
+	@NotBlank(message="{sysdept.title.require}", groups = DefaultGroup.class)
+	private String title;
 
-	@ApiModelProperty(value = "排序")
+	@Schema(title = "排序")
 	@Min(value = 0, message = "{sort.number}", groups = DefaultGroup.class)
 	private Integer sort;
 
-	@ApiModelProperty(value = "创建时间")
+	@Schema(title = "创建时间")
 	@JsonProperty(access = JsonProperty.Access.READ_ONLY)
 	private Date createDate;
 
-	@ApiModelProperty(value = "上级部门名称")
-	private String parentName;
+	@Schema(title = "上级部门名称")
+	private String parenttitle;
 
 	@Override
 	public Long getId() {
@@ -77,12 +76,12 @@ public class SysDeptDTO extends TreeNode implements Serializable {
 		this.pid = pid;
 	}
 
-	public String getName() {
-		return name;
+	public String gettitle() {
+		return title;
 	}
 
-	public void setName(String name) {
-		this.name = name;
+	public void settitle(String title) {
+		this.title = title;
 	}
 
 	public Integer getSort() {
@@ -101,11 +100,11 @@ public class SysDeptDTO extends TreeNode implements Serializable {
 		this.createDate = createDate;
 	}
 
-	public String getParentName() {
-		return parentName;
+	public String getParenttitle() {
+		return parenttitle;
 	}
 
-	public void setParentName(String parentName) {
-		this.parentName = parentName;
+	public void setParenttitle(String parenttitle) {
+		this.parenttitle = parenttitle;
 	}
 }

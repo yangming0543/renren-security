@@ -21,14 +21,14 @@ import io.renren.modules.sys.dto.SysRoleDTO;
 import io.renren.modules.sys.service.SysRoleDataScopeService;
 import io.renren.modules.sys.service.SysRoleMenuService;
 import io.renren.modules.sys.service.SysRoleService;
-import io.swagger.annotations.Api;
-import io.swagger.annotations.ApiImplicitParam;
-import io.swagger.annotations.ApiImplicitParams;
-import io.swagger.annotations.ApiOperation;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.Parameter;
+import io.swagger.v3.oas.annotations.Parameters;
+import io.swagger.v3.oas.annotations.enums.ParameterIn;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.AllArgsConstructor;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.web.bind.annotation.*;
-import springfox.documentation.annotations.ApiIgnore;
 
 import java.util.HashMap;
 import java.util.List;
@@ -41,7 +41,7 @@ import java.util.Map;
  */
 @RestController
 @RequestMapping("/sys/role")
-@Api(tags = "角色管理")
+@Tag(name = "角色管理")
 @AllArgsConstructor
 public class SysRoleController {
     private final SysRoleService sysRoleService;
@@ -49,23 +49,23 @@ public class SysRoleController {
     private final SysRoleDataScopeService sysRoleDataScopeService;
 
     @GetMapping("page")
-    @ApiOperation("分页")
-    @ApiImplicitParams({
-            @ApiImplicitParam(name = Constant.PAGE, value = "当前页码，从1开始", paramType = "query", required = true, dataType = "int"),
-            @ApiImplicitParam(name = Constant.LIMIT, value = "每页显示记录数", paramType = "query", required = true, dataType = "int"),
-            @ApiImplicitParam(name = Constant.ORDER_FIELD, value = "排序字段", paramType = "query", dataType = "String"),
-            @ApiImplicitParam(name = Constant.ORDER, value = "排序方式，可选值(asc、desc)", paramType = "query", dataType = "String"),
-            @ApiImplicitParam(name = "name", value = "角色名", paramType = "query", dataType = "String")
+    @Operation(summary = "分页")
+    @Parameters({
+            @Parameter(name = Constant.PAGE, description = "当前页码，从1开始", in = ParameterIn.QUERY, required = true, ref = "int"),
+            @Parameter(name = Constant.LIMIT, description = "每页显示记录数", in = ParameterIn.QUERY, required = true, ref = "int"),
+            @Parameter(name = Constant.ORDER_FIELD, description = "排序字段", in = ParameterIn.QUERY, ref = "String"),
+            @Parameter(name = Constant.ORDER, description = "排序方式，可选值(asc、desc)", in = ParameterIn.QUERY, ref = "String"),
+            @Parameter(name = "name", description = "角色名", in = ParameterIn.QUERY, ref = "String")
     })
     @RequiresPermissions("sys:role:page")
-    public Result<PageData<SysRoleDTO>> page(@ApiIgnore @RequestParam Map<String, Object> params) {
+    public Result<PageData<SysRoleDTO>> page(@Parameter(hidden = true) @RequestParam Map<String, Object> params) {
         PageData<SysRoleDTO> page = sysRoleService.page(params);
 
         return new Result<PageData<SysRoleDTO>>().ok(page);
     }
 
     @GetMapping("list")
-    @ApiOperation("列表")
+    @Operation(summary = "列表")
     @RequiresPermissions("sys:role:list")
     public Result<List<SysRoleDTO>> list() {
         List<SysRoleDTO> data = sysRoleService.list(new HashMap<>(1));
@@ -74,7 +74,7 @@ public class SysRoleController {
     }
 
     @GetMapping("{id}")
-    @ApiOperation("信息")
+    @Operation(summary = "信息")
     @RequiresPermissions("sys:role:info")
     public Result<SysRoleDTO> get(@PathVariable("id") Long id) {
         SysRoleDTO data = sysRoleService.get(id);
@@ -91,7 +91,7 @@ public class SysRoleController {
     }
 
     @PostMapping
-    @ApiOperation("保存")
+    @Operation(summary = "保存")
     @LogOperation("保存")
     @RequiresPermissions("sys:role:save")
     public Result save(@RequestBody SysRoleDTO dto) {
@@ -104,7 +104,7 @@ public class SysRoleController {
     }
 
     @PutMapping
-    @ApiOperation("修改")
+    @Operation(summary = "修改")
     @LogOperation("修改")
     @RequiresPermissions("sys:role:update")
     public Result update(@RequestBody SysRoleDTO dto) {
@@ -117,7 +117,7 @@ public class SysRoleController {
     }
 
     @DeleteMapping
-    @ApiOperation("删除")
+    @Operation(summary = "删除")
     @LogOperation("删除")
     @RequiresPermissions("sys:role:delete")
     public Result delete(@RequestBody Long[] ids) {
