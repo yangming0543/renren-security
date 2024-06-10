@@ -41,10 +41,7 @@ const routes: Array<RouteRecordRaw> = [
     name: "error",
     component: Error,
     meta: { title: "错误页面", isNavigationMenu: false }
-  }
-];
-
-export const errorRoute: Array<RouteRecordRaw> = [
+  },
   {
     path: "/:path(.*)*",
     redirect: { path: "/error", query: { to: 404 }, replace: true },

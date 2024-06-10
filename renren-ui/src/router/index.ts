@@ -10,7 +10,7 @@ import {
   RouteLocationNormalized,
   RouteRecordRaw
 } from "vue-router";
-import baseRoutes, { errorRoute } from "./base";
+import baseRoutes from "./base";
 import emits from "@/utils/emits";
 import { EMitt } from "@/constants/enum";
 
@@ -66,7 +66,7 @@ router.beforeEach((to, from, next) => {
     } else {
       if (token) {
         store.initApp().then((res: Array<RouteRecordRaw>) => {
-          const mergeRoute = baseRoutes.concat(res).concat(errorRoute);
+          const mergeRoute = baseRoutes.concat(res);
           router.options.routes = mergeRoute;
           registerToRouter(router, mergeRoute);
           if (!to.matched.length) {
