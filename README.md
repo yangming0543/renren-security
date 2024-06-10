@@ -74,7 +74,7 @@ renren-security
 <br>
 
 **技术选型：**
-- 核心框架：Spring Boot 2.7
+- 核心框架：Spring Boot 3.x
 - 安全框架：Apache Shiro 1.12
 - 持久层框架：MyBatis 3.5
 - 定时器：Quartz 2.3
