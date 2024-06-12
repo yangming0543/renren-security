@@ -32,7 +32,7 @@ public class ScheduleJobLogDTO implements Serializable {
     private Long jobId;
 
     @Schema(title = "spring bean名称")
-    private String beantitle;
+    private String beanName;
 
     @Schema(title = "参数")
     private String params;

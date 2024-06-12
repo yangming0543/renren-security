@@ -39,8 +39,8 @@ public class SysRoleDTO implements Serializable {
 	private Long id;
 
 	@Schema(title = "角色名称")
-	@NotBlank(message="{sysrole.title.require}", groups = DefaultGroup.class)
-	private String title;
+	@NotBlank(message="{sysrole.name.require}", groups = DefaultGroup.class)
+	private String name;
 
 	@Schema(title = "备注")
 	private String remark;

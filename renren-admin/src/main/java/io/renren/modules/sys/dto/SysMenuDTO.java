@@ -18,6 +18,8 @@ import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Null;
+import lombok.Data;
+import lombok.EqualsAndHashCode;
 import org.hibernate.validator.constraints.Range;
 
 import java.io.Serializable;
@@ -29,6 +31,8 @@ import java.util.Date;
  * @author Mark sunlightcs@gmail.com
  * @since 1.0.0
  */
+@Data
+@EqualsAndHashCode(callSuper = true)
 @Schema(title = "菜单管理")
 public class SysMenuDTO extends TreeNode<SysMenuDTO> implements Serializable {
     private static final long serialVersionUID = 1L;
@@ -43,8 +47,8 @@ public class SysMenuDTO extends TreeNode<SysMenuDTO> implements Serializable {
 	private Long pid;
 
 	@Schema(title = "菜单名称")
-	@NotBlank(message="{sysmenu.title.require}", groups = DefaultGroup.class)
-	private String title;
+	@NotBlank(message="sysmenu.name.require", groups = DefaultGroup.class)
+	private String name;
 
 	@Schema(title = "菜单URL")
 	private String url;
@@ -68,7 +72,7 @@ public class SysMenuDTO extends TreeNode<SysMenuDTO> implements Serializable {
 	private Date createDate;
 
 	@Schema(title = "上级菜单名称")
-	private String parenttitle;
+	private String parentName;
 
 	@Override
 	public Long getId() {
@@ -90,67 +94,4 @@ public class SysMenuDTO extends TreeNode<SysMenuDTO> implements Serializable {
 		this.pid = pid;
 	}
 
-	public String gettitle() {
-		return title;
-	}
-
-	public void settitle(String title) {
-		this.title = title;
-	}
-
-	public String getUrl() {
-		return url;
-	}
-
-	public void setUrl(String url) {
-		this.url = url;
-	}
-
-	public Integer getMenuType() {
-		return menuType;
-	}
-
-	public void setMenuType(Integer menuType) {
-		this.menuType = menuType;
-	}
-
-	public String getIcon() {
-		return icon;
-	}
-
-	public void setIcon(String icon) {
-		this.icon = icon;
-	}
-
-	public String getPermissions() {
-		return permissions;
-	}
-
-	public void setPermissions(String permissions) {
-		this.permissions = permissions;
-	}
-
-	public Integer getSort() {
-		return sort;
-	}
-
-	public void setSort(Integer sort) {
-		this.sort = sort;
-	}
-
-	public Date getCreateDate() {
-		return createDate;
-	}
-
-	public void setCreateDate(Date createDate) {
-		this.createDate = createDate;
-	}
-
-	public String getParenttitle() {
-		return parenttitle;
-	}
-
-	public void setParenttitle(String parenttitle) {
-		this.parenttitle = parenttitle;
-	}
 }

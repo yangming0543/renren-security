@@ -26,7 +26,7 @@ public class SystemDTO implements Serializable {
     private static final long serialVersionUID = 1L;
 
     private Long sysTime;
-    private String ostitle;
+    private String osName;
     private String osArch;
     private String osVersion;
     private String userLanguage;
@@ -35,13 +35,13 @@ public class SystemDTO implements Serializable {
     private Long freePhysical;
     private BigDecimal memoryRate;
     private Integer processors;
-    private String jvmtitle;
+    private String jvmName;
     private String javaVersion;
     private String javaHome;
     private Long javaTotalMemory;
     private Long javaFreeMemory;
     private Long javaMaxMemory;
-    private String usertitle;
+    private String userName;
     private BigDecimal systemCpuLoad;
     private String userTimezone;
 

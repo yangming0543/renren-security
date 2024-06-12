@@ -18,6 +18,8 @@ import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Null;
+import lombok.Data;
+import lombok.EqualsAndHashCode;
 
 import java.io.Serializable;
 import java.util.Date;
@@ -28,6 +30,8 @@ import java.util.Date;
  * @author Mark sunlightcs@gmail.com
  * @since 1.0.0
  */
+@Data
+@EqualsAndHashCode(callSuper = true)
 @Schema(title = "部门管理")
 public class SysDeptDTO extends TreeNode implements Serializable {
     private static final long serialVersionUID = 1L;
@@ -42,8 +46,8 @@ public class SysDeptDTO extends TreeNode implements Serializable {
 	private Long pid;
 
 	@Schema(title = "部门名称")
-	@NotBlank(message="{sysdept.title.require}", groups = DefaultGroup.class)
-	private String title;
+	@NotBlank(message="{sysdept.name.require}", groups = DefaultGroup.class)
+	private String name;
 
 	@Schema(title = "排序")
 	@Min(value = 0, message = "{sort.number}", groups = DefaultGroup.class)
@@ -54,7 +58,7 @@ public class SysDeptDTO extends TreeNode implements Serializable {
 	private Date createDate;
 
 	@Schema(title = "上级部门名称")
-	private String parenttitle;
+	private String parentName;
 
 	@Override
 	public Long getId() {
@@ -74,37 +78,5 @@ public class SysDeptDTO extends TreeNode implements Serializable {
 	@Override
 	public void setPid(Long pid) {
 		this.pid = pid;
-	}
-
-	public String gettitle() {
-		return title;
-	}
-
-	public void settitle(String title) {
-		this.title = title;
-	}
-
-	public Integer getSort() {
-		return sort;
-	}
-
-	public void setSort(Integer sort) {
-		this.sort = sort;
-	}
-
-	public Date getCreateDate() {
-		return createDate;
-	}
-
-	public void setCreateDate(Date createDate) {
-		this.createDate = createDate;
-	}
-
-	public String getParenttitle() {
-		return parenttitle;
-	}
-
-	public void setParenttitle(String parenttitle) {
-		this.parenttitle = parenttitle;
 	}
 }

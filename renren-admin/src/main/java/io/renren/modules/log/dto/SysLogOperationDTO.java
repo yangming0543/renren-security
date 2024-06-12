@@ -53,7 +53,7 @@ public class SysLogOperationDTO implements Serializable {
 	private Integer status;
 
 	@Schema(title = "用户名")
-	private String creatortitle;
+	private String creatorName;
 
 	@Schema(title = "创建时间")
 	private Date createDate;

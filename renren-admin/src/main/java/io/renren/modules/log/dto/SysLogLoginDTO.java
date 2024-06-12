@@ -41,7 +41,7 @@ public class SysLogLoginDTO implements Serializable {
 	private String ip;
 
 	@Schema(title = "用户名")
-	private String creatortitle;
+	private String creatorName;
 
 	@Schema(title = "创建时间")
 	private Date createDate;

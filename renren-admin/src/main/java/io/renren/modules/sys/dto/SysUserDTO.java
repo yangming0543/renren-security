@@ -50,8 +50,8 @@ public class SysUserDTO implements Serializable {
 	private String password;
 
 	@Schema(title = "姓名", requiredMode = Schema.RequiredMode.REQUIRED)
-	@NotBlank(message="{sysuser.realtitle.require}", groups = DefaultGroup.class)
-	private String realtitle;
+	@NotBlank(message="{sysuser.realName.require}", groups = DefaultGroup.class)
+	private String realName;
 
 	@Schema(title = "头像")
 	private String headUrl;
@@ -87,6 +87,6 @@ public class SysUserDTO implements Serializable {
 	private List<Long> roleIdList;
 
 	@Schema(title = "部门名称")
-	private String depttitle;
+	private String deptName;
 
 }

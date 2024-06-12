@@ -40,7 +40,7 @@ public class ScheduleJobDTO implements Serializable {
 
     @Schema(title = "spring bean名称")
     @NotBlank(message = "{schedule.bean.require}", groups = DefaultGroup.class)
-    private String beantitle;
+    private String beanName;
 
     @Schema(title = "参数")
     private String params;

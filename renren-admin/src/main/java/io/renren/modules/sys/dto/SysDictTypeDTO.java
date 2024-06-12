@@ -42,8 +42,8 @@ public class SysDictTypeDTO implements Serializable {
 	private String dictType;
 
 	@Schema(title = "字典名称")
-	@NotBlank(message="{sysdict.title.require}", groups = DefaultGroup.class)
-	private String dicttitle;
+	@NotBlank(message="{sysdict.name.require}", groups = DefaultGroup.class)
+	private String dictName;
 
 	@Schema(title = "备注")
 	private String remark;
