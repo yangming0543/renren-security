@@ -13,7 +13,7 @@
 	<parent>
 		<groupId>org.springframework.boot</groupId>
 		<artifactId>spring-boot-starter-parent</artifactId>
-		<version>3.2.5</version>
+		<version>3.2.6</version>
 	</parent>
 
     <modules>
@@ -34,9 +34,9 @@
         <sqlserver.version>4.0</sqlserver.version>
         <oracle.version>11.2.0.3</oracle.version>
         <dameng.version>8.1.2.79</dameng.version>
-        <hutool.version>5.8.22</hutool.version>
+        <hutool.version>5.8.28</hutool.version>
         <jsoup.version>1.15.3</jsoup.version>
-        <knife4j.version>4.3.0</knife4j.version>
+        <knife4j.version>4.5.0</knife4j.version>
         <lombok.version>1.18.24</lombok.version>
         <javax.servlet.version>4.0.1</javax.servlet.version>
     </properties>
