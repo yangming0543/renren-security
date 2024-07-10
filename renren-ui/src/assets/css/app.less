@@ -557,3 +557,11 @@ body {
 .ql-toolbar.ql-snow{
   width: 100% !important;
 }
+
+.el-form--inline {
+  .el-form-item {
+    & > .el-input, .el-cascader, .el-select, .el-date-editor, .el-autocomplete {
+      min-width: 200px;
+    }
+  }
+}
