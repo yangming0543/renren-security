@@ -8,10 +8,12 @@
 
 package io.renren.service.impl;
 
+import com.baomidou.mybatisplus.core.conditions.update.LambdaUpdateWrapper;
 import io.renren.common.service.impl.BaseServiceImpl;
 import io.renren.dao.TokenDao;
 import io.renren.entity.TokenEntity;
 import io.renren.service.TokenService;
+import jakarta.annotation.Resource;
 import org.springframework.stereotype.Service;
 
 import java.util.Date;
@@ -20,6 +22,10 @@ import java.util.UUID;
 
 @Service
 public class TokenServiceImpl extends BaseServiceImpl<TokenDao, TokenEntity> implements TokenService {
+
+    @Resource
+	private TokenDao tokenDao;
+
 	/**
 	 * 12小时后过期
 	 */
@@ -78,12 +84,12 @@ public class TokenServiceImpl extends BaseServiceImpl<TokenDao, TokenEntity> imp
 	public void expireToken(Long userId){
 		Date now = new Date();
 
-		TokenEntity tokenEntity = new TokenEntity();
-		tokenEntity.setUserId(userId);
-		tokenEntity.setUpdateDate(now);
-		tokenEntity.setExpireDate(now);
+		LambdaUpdateWrapper<TokenEntity> updateWrapper = new LambdaUpdateWrapper<>();
+		updateWrapper.eq(TokenEntity::getUserId, userId);
+		updateWrapper.set(TokenEntity::getExpireDate, now);
+		updateWrapper.set(TokenEntity::getUpdateDate, now);
 
-		this.updateById(tokenEntity);
+		tokenDao.update(updateWrapper);
 	}
 
 	private String generateToken(){
