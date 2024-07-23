@@ -34,6 +34,8 @@ public class DbConfig {
     private SQLServerGeneratorDao sqlServerGeneratorDao;
     @Resource
     private PostgreSQLGeneratorDao postgreSQLGeneratorDao;
+    @Resource
+    private DmGeneratorDao dmGeneratorDao;
 
     @Bean
     @Primary
@@ -46,7 +48,9 @@ public class DbConfig {
             return sqlServerGeneratorDao;
         } else if ("postgresql".equalsIgnoreCase(database)) {
             return postgreSQLGeneratorDao;
-        } else {
+        } else if("dm".equalsIgnoreCase(database)){
+            return dmGeneratorDao;
+        }else {
             throw new RenException("不支持当前数据库：" + database);
         }
     }

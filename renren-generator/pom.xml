@@ -17,12 +17,13 @@
 		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
 		<java.version>17</java.version>
 		<mybatis.spring.boot.version>3.0.3</mybatis.spring.boot.version>
-		<pagehelper.spring.boot.version>1.4.2</pagehelper.spring.boot.version>
+		<pagehelper.spring.boot.version>1.4.7</pagehelper.spring.boot.version>
 		<druid.version>1.2.21</druid.version>
 		<commons.configuration.version>1.10</commons.configuration.version>
 		<velocity.version>1.7</velocity.version>
 		<mssql.version>4.0</mssql.version>
 		<oracle.version>11.2.0.3</oracle.version>
+		<dameng.version>8.1.2.141</dameng.version>
 		<hutool.version>5.8.22</hutool.version>
 	</properties>
 
@@ -87,6 +88,12 @@
 		<dependency>
 			<groupId>org.postgresql</groupId>
 			<artifactId>postgresql</artifactId>
+		</dependency>
+		<!-- 达梦驱动 -->
+		<dependency>
+			<groupId>com.dameng</groupId>
+			<artifactId>DmJdbcDriver18</artifactId>
+			<version>${dameng.version}</version>
 		</dependency>
 	</dependencies>
 

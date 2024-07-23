@@ -51,6 +51,7 @@ public class GenUtils {
         templates.add("template/sqlserver.vm" );
         templates.add("template/oracle.vm" );
         templates.add("template/postgresql.vm" );
+        templates.add("template/dm.vm" );
         return templates;
     }
 
@@ -247,6 +248,10 @@ public class GenUtils {
 
         if (template.contains("postgresql.vm" )) {
             return className.toLowerCase() + ".postgresql.sql";
+        }
+
+        if (template.contains("dm.vm" )) {
+            return className.toLowerCase() + ".dm.sql";
         }
 
         return null;
